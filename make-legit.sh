@@ -74,6 +74,7 @@ if [[ "$OSTYPE" == "linux"* ]]; then
             report
         fi
         apt install libssl-dev
+        apt install rustc
     fi
     if [[ "$OSTYPE" == "linux-musl" ]]; then
         PACKAGE_MANAGER=apk
@@ -110,7 +111,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         AWK=awk
         export AWK
     checkbrew
-    brew reinstall --force openssl@1.1
+    #brew reinstall --force openssl@1.1
     #symlink on your machine too...
     #echo brew list --versions
     #brew list --versions
@@ -147,3 +148,5 @@ else
     echo TODO add support for $OSTYPE
 fi
 
+cargo build --release
+sudo install -v ././target/release/legit /usr/local/bin/legit
