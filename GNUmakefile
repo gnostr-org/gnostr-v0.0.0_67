@@ -158,14 +158,14 @@ git-add: remove
 
 .PHONY: push
 .ONESHELL:
-push: remove touch-time touch-block-time git-add
+push: touch-time
 	@echo push
 	bash -c "git commit --allow-empty -m '$(TIME)'"
 	bash -c "git push -f origin	+master:master"
 
 .PHONY: branch
 .ONESHELL:
-branch: remove git-add docs touch-time touch-block-time
+branch: docs touch-time touch-block-time
 	@echo branch
 
 	git add --ignore-errors GNUmakefile TIME GLOBAL .github *.sh *.yml
@@ -174,49 +174,12 @@ branch: remove git-add docs touch-time touch-block-time
 	git branch $(TIME)
 	git push -f origin $(TIME)
 
-.PHONY: global-branch
-.ONESHELL:
-global-branch: remove git-add docs touch-time touch-global touch-block-time
-	@echo global-branch
-	bash -c "git commit -m 'make global-branch by $(GIT_USER_NAME) on global-$(TIME)'"
-		git branch global-$(TIME)
-		git push -f --all
-
-.PHONY: time-branch
-.ONESHELL:
-time-branch: remove git-add docs touch-time touch-block-time
-	@echo time-branch
-	bash -c "git commit -m 'make time-branch by $(GIT_USER_NAME) on time-$(TIME)'"
-		git branch time-$(TIME)
-		git push -f origin time-$(TIME)
-
-.PHONY: trigger
-trigger: remove git-add touch-block-time touch-time touch-global
-
 .PHONY: touch-time
 .ONESHELL:
-touch-time: remove git-add touch-block-time
+touch-time:
 	@echo touch-time
 	echo $(TIME) $(shell git rev-parse HEAD) > TIME
-
-.PHONY: touch-global
-.ONESHELL:
-touch-global: remove git-add touch-block-time
-	@echo touch-global
-	echo $(TIME) $(shell git rev-parse HEAD) > GLOBAL
-
-.PHONY: touch-block-time
-.ONESHELL:
-touch-block-time: remove git-add
-	@echo touch-block-time
-	bash -c "pip install --user blockcypher"
-	./touch-block-time.py
-	BLOCK_TIME=$(shell  ./touch-block-time.py)
-	bash -c "export BLOCK_TIME"
-	echo $(BLOCK_TIME)
-	bash -c "git commit --allow-empty -m '$(shell ./touch-block-time.py)-$(TIME)'"
-		git branch $(shell ./touch-block-time.py)-$(TIME)
-		git push -f origin $(shell ./touch-block-time.py)-$(TIME)
+	git add TIME
 
 .PHONY: automate
 automate: touch-time git-add
