@@ -2,6 +2,8 @@ SHELL                                   := /bin/bash
 PWD 									?= pwd_unknown
 TIME 									:= $(shell date +%s)
 export TIME
+SESSION_KEY                             := $(shell gnostr --hash $(TIME))
+export SESSION_KEY
 OS                                      :=$(shell uname -s)
 export OS
 OS_VERSION                              :=$(shell uname -r)
@@ -20,8 +22,8 @@ ifeq ($(ARCH),arm64)
 TRIPLET                                 :=aarch64-linux-gnu
 export TRIPLET
 endif
-LEGIT									:= $(which legit)
-export LEGIT
+GNOSTR_LEGIT									:= $(shell which gnostr-legit)
+export GNOSTR_LEGIT
 CARGO_PATH								:=$(HOME)/.cargo
 export CARGO_PATH
 #PATH									:=$(shell sudo -su $(USER) $(CARGO_PATH))/bin:$(PATH)
@@ -155,10 +157,12 @@ report:## 	report
 	@echo '	[ARGUMENTS]	'
 	@echo '      args:'
 	@echo '        - TIME=${TIME}'
+	@echo '        - SESSION_KEY=${SESSION_KEY}'
+	@echo ''
 	@echo '        - PROJECT_NAME=${PROJECT_NAME}'
 	@echo ''
-	@echo '        - LEGIT=${LEGIT}'
-	@echo '        - PATH=${PATH}'
+	@echo '        - GNOSTR_LEGIT=${GNOSTR_LEGIT}'
+###@echo '        - PATH=${PATH}'
 	@echo '        - CARGO_PATH=${CARGO_PATH}'
 	@echo ''
 	@echo '        - GIT_USER_NAME=${GIT_USER_NAME}'
