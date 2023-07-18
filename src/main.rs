@@ -19,27 +19,55 @@ use git2::*;
 use sha2::{Sha256, Digest};
 use pad::{PadStr, Alignment};
 
+use std::path::PathBuf;//for get_current_dir
+
 mod worker;
 mod gitminer;
 mod repo;
 
-fn type_of<T>(_: T) -> &'static str {
-    type_name::<T>()
+//fn type_of<T>(_: T) -> &'static str {
+//    type_name::<T>()
+//}
+
+fn convert_to_u32(v: usize) -> Option<i8> {
+    if v > (std::i8::MAX as i32).try_into().unwrap() {
+        None
+    } else {
+        Some(v as i8)
+    }
 }
 
-//fn convert_to_u32(v: usize) -> Option<i8> {
-//    if v > (std::i8::MAX as i32).try_into().unwrap() {
-//        None
-//    } else {
-//        Some(v as i8)
-//    }
-//}
+fn get_current_working_dir() -> std::io::Result<PathBuf> {
+    env::current_dir()
+}
 
-//fn get_current_working_dir() -> std::io::Result<PathBuf> {
-//    env::current_dir()
-//}
+#[cfg(debug_assertions)]
+fn example() {
+    println!("Debugging enabled");
+}
+
+#[cfg(not(debug_assertions))]
+fn example() {
+    println!("Debugging disabled");
+}
+
 
 fn main() -> io::Result<()> {
+    if cfg!(debug_assertions) {
+        println!("Debugging enabled");
+    } else {
+        println!("Debugging disabled");
+    }
+
+    #[cfg(debug_assertions)]
+    println!("Debugging enabled");
+
+    #[cfg(not(debug_assertions))]
+    println!("Debugging disabled");
+
+    example();
+    
+
 
     let start = time::get_time();
     let system_time = SystemTime::now();
@@ -48,6 +76,10 @@ fn main() -> io::Result<()> {
     //println!("{}", datetime.format("%d/%m/%Y %T/%s"));
     //println!("{}", datetime.format("%d/%m/%Y %T"));
 
+    let cwd = get_current_working_dir();
+    #[cfg(debug_assertions)]
+        println!("Debugging enabled");
+    //println!("{:#?}", cwd);
     let state = repo::state();
     //println!("{:#?}", state);
     //
