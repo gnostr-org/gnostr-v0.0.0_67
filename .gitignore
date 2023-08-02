@@ -80,6 +80,7 @@ libtclstub.a
 libsecp256k1.a
 
 gnostr-cat
+gnostr-repo
 
 bin
 .gnostr/gnostr-proxy
