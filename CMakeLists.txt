@@ -288,4 +288,5 @@ install(TARGETS gnostr-req
         CONFIGURATIONS Release
         RUNTIME DESTINATION /usr/local/bin)
 
+install(FILES gnostr DESTINATION /usr/local/bin PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ )
 
