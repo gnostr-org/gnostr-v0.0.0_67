@@ -29,6 +29,8 @@
 
 #include "include/openssl_hash.h"
 
+#include "include/gnostr_sha256.h"
+
 #define VERSION "0.0.0_29"
 
 #define MAX_TAGS 32
@@ -469,7 +471,30 @@ static int parse_args(int argc, const char *argv[], struct args *args, struct no
 
 		if (!strcmp(arg, "--about") | !strcmp(arg, "-a")) { about(); }
 
-		if (!strcmp(arg, "--hash")){ openssl_hash(argc, *argv, args); }
+		if (!strcmp(arg, "--hash")){
+
+			if (!argc){
+
+				struct Sha_256 sha_256;
+				uint8_t hash[32];
+				sha_256_init(&sha_256, hash);
+				sha_256_write(&sha_256, hash, strlen(hash));
+				sha_256_close(&sha_256);
+				print_hex(hash,32);
+
+			} else {
+
+				struct Sha_256 sha_256;
+				uint8_t hash[32];
+				arg = *argv++; argc--;
+				sha_256_init(&sha_256, hash);
+				sha_256_write(&sha_256, arg, strlen(arg));
+				sha_256_close(&sha_256);
+				print_hex(hash,32);
+
+			}
+			exit(0);
+		}
 
 		if (!argc) {
 			fprintf(stderr, "expected argument: '%s'\n", arg);

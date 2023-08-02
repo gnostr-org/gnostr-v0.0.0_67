@@ -1,15 +1,16 @@
 CFLAGS                                  = -Wall -O2 -Ideps/secp256k1/include
 CFLAGS                                 += -I/include
 LDFLAGS                                 = -Wl -V
-GNOSTR_OBJS                             = gnostr.o       sha256.o aes.o base64.o libsecp256k1.a
-#GNOSTR_GIT_OBJS                         = gnostr-git.o   sha256.o aes.o base64.o libgit.a
-#GNOSTR_RELAY_OBJS                       = gnostr-relay.o sha256.o aes.o base64.o
-## GNOSTR_XOR_OBJS                         = gnostr-xor.o   sha256.o aes.o base64.o libsecp256k1.a
+GNOSTR_OBJS                             = gnostr.o         sha256.o gnostr-sha256.o aes.o base64.o libsecp256k1.a
+#GNOSTR_GIT_OBJS                        = gnostr-git.o     sha256.o aes.o base64.o libgit.a
+#GNOSTR_RELAY_OBJS                      = gnostr-relay.o   sha256.o aes.o base64.o
+## GNOSTR_XOR_OBJS                      = gnostr-xor.o     sha256.o aes.o base64.o libsecp256k1.a
 HEADER_INCLUDE                          = include
 HEADERS                                 = $(HEADER_INCLUDE)/hex.h \
                                          $(HEADER_INCLUDE)/random.h \
                                          $(HEADER_INCLUDE)/config.h \
                                          $(HEADER_INCLUDE)/sha256.h \
+                                         $(HEADER_INCLUDE)/gnostr_sha256.h \
                                          deps/secp256k1/include/secp256k1.h
 
 ifneq ($(prefix),)
@@ -196,16 +197,6 @@ gnostr-legit:deps/gnostr-legit/target/release/gnostr-legit## 	gnostr-legit
 	cp $< $@ && exit;
 
 
-
-deps/gnostr-sha256/.git:
-	@devtools/refresh-submodules.sh deps/gnostr-sha256
-#.PHONY:deps/gnostr-sha256/gnostr-sha256
-deps/gnostr-sha256/gnostr-sha256:deps/gnostr-sha256/.git
-	cd deps/gnostr-sha256 && \
-		make cargo-install
-deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256/gnostr-sha256## 	gnostr-sha256
-.PHONY:
-gnostr-sha256:deps/gnostr-sha256/target/release/gnostr-sha256
 
 deps/gnostr-proxy/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-proxy

@@ -193,13 +193,15 @@ target_link_libraries (http_relay ${lib_dep})
 # executables
 #//////////////////////////
 
-add_executable(gnostr-client src/wss_client.cc)
-add_executable(gnostr-req src/wss_req.cc)
-add_executable(gnostr-gnode src/wss_relay.cc)
+add_executable(gnostr-client src/gnostr_client.cc)
+add_executable(gnostr-repo src/gnostr_repo.cc)
+add_executable(gnostr-gnode src/gnostr_gnode.cc)
+#add_executable(gnostr-sha256 src/gnostr_sha256.c)
 
 target_link_libraries (gnostr-client ${lib_dep})
-target_link_libraries (gnostr-req ${lib_dep})
+target_link_libraries (gnostr-repo ${lib_dep})
 target_link_libraries (gnostr-gnode ${lib_dep})
+#target_link_libraries (gnostr-sha256 ${lib_dep})
 
 #//////////////////////////
 # tests
@@ -207,6 +209,9 @@ target_link_libraries (gnostr-gnode ${lib_dep})
 
 add_executable(tests test/tests.cc)
 target_link_libraries (tests ${lib_dep})
+
+#add_executable(gnostr-sha256-test test/gnostr_sha256_test.cc)
+#target_link_libraries (gnostr-sha256-test ${lib_dep})
 
 #//////////////////////////
 # examples
@@ -281,10 +286,10 @@ install(TARGETS gnostr-client
         CONFIGURATIONS Release
         RUNTIME DESTINATION /usr/local/bin)
 
-install(TARGETS gnostr-req
+install(TARGETS gnostr-repo
         CONFIGURATIONS Debug
         RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
-install(TARGETS gnostr-req
+install(TARGETS gnostr-repo
         CONFIGURATIONS Release
         RUNTIME DESTINATION /usr/local/bin)
 

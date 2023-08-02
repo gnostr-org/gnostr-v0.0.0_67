@@ -83,3 +83,4 @@ gnostr-cat
 
 bin
 .gnostr/gnostr-proxy
+gnostr-sha256-test
