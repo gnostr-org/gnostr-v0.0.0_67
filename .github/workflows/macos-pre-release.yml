@@ -27,6 +27,7 @@ jobs:
           printenv
       - name: "Build pre-release"
         run: |
+          mkdir -p dist
           make all
           mv nostril nostril-$RUNNER_OS-$RUNNER_ARCH
           shasum -a 256 nostril-$RUNNER_OS-$RUNNER_ARCH > nostril-$RUNNER_OS-$RUNNER_ARCH.sha256.txt

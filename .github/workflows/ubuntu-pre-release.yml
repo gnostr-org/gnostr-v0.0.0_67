@@ -26,10 +26,13 @@ jobs:
           printenv
       - name: "sudo apt-get install libcurl4-openssl-dev gettext"
         run: |
-          sudo apt-get install libcurl4-openssl-dev gettext
+          sudo apt-get update -y
+          sudo apt-get install libcurl4-openssl-dev gettext python3 python3-pip
+          pip install -U git-archive-all
       - name: "Build pre-release"
         run: |
           sudo touch /root/GITHUB_TOKEN.txt
+          sudo mkdir -p dist
           sudo make dist
       - name: Save state
         run: echo "{name}={value}" >> $GITHUB_STATE

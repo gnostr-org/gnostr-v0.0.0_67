@@ -24,7 +24,7 @@ jobs:
   macos-build_and_test:
     strategy:
       matrix:
-        os: [macos-latest, macos-11, macos-12]
+        os: [macos-latest]#, macos-11, macos-12]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: styfle/cancel-workflow-action@0.11.0
@@ -37,7 +37,8 @@ jobs:
           printenv
       - name: make
         run: |
-          type -P brew && brew install automake || echo "install automake"
+          type -P brew && brew install automake gettext clang python3 python3-pip || echo "install automake"
+          pip install -U git-archive-all
           make submodules
           make all
       - name: make install
