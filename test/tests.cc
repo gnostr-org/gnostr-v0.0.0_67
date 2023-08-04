@@ -11,7 +11,7 @@
 #include "log.hh"
 #include "nostr.hh"
 
-std::string log_program_name("tests");
+std::string log_program_name("gnostr-tests");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // prototypes
