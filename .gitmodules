@@ -90,3 +90,18 @@
 [submodule "deps/gnostr-sha256"]
 	path = deps/gnostr-sha256
 	url = https://github.com/gnostr-org/gnostr-sha256.git
+	branch = master
+	ignore = dirty
+	shallow = true
+[submodule "deps/gnostr-fetch"]
+	path = deps/gnostr-fetch
+	url = https://github.com/gnostr-org/gnostr-fetch.git
+	branch = master
+	ignore = dirty
+	shallow = true
+[submodule "deps/gnostr-lfs"]
+	path = deps/gnostr-lfs
+	url = https://github.com/gnostr-org/gnostr-lfs.git
+	branch = master
+	ignore = dirty
+	shallow = true
