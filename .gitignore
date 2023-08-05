@@ -30,6 +30,11 @@ gnostr-gnode
 gnostr-req
 tests
 
+gnostr-repo
+gnostr-sha256
+gnostr-sha256-test
+gnostr-tests
+
 libnostr.a
 
 install_manifest.txt

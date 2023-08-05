@@ -469,7 +469,11 @@ static int parse_args(int argc, const char *argv[], struct args *args, struct no
 
 		if (!strcmp(arg, "--about") | !strcmp(arg, "-a")) { about(); }
 
-		if (!strcmp(arg, "--hash")){ openssl_hash(argc, *argv, args); }
+		if (!strcmp(arg, "--hash")){
+
+			openssl_hash(argc, *argv, args);
+
+		}
 
 		if (!argc) {
 			fprintf(stderr, "expected argument: '%s'\n", arg);

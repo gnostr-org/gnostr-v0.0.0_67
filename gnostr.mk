@@ -216,6 +216,18 @@ deps/gnostr-proxy:deps/gnostr-proxy/.git
 gnostr-proxy:deps/gnostr-proxy
 	cat deps/gnostr-proxy/public/assets/entrypoints.json
 
+
+deps/gnostr-lfs/.git:
+	@devtools/refresh-submodules.sh deps/gnostr-lfs
+.PHONY:deps/gnostr-lfs
+deps/gnostr-lfs:deps/gnostr-lfs/.git
+	cd deps/gnostr-lfs && \
+		make run
+.PHONY:gnostr-lfs
+gnostr-lfs:deps/gnostr-lfs
+	#cat deps/gnostr-proxy/public/assets/entrypoints.json
+
+
 #deps/gnostr-relay/.git:
 #	@devtools/refresh-submodules.sh deps/gnostr-relay
 ##.PHONY:deps/gnostr-relay/gnostr-relay
