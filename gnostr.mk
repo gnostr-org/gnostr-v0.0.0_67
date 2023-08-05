@@ -175,14 +175,10 @@ gnostr-git:deps/gnostr-git/gnostr-git## 	gnostr-git
 gnostr-get-relays:
 	$(CC) ./template/gnostr-get-relays.c -o gnostr-get-relays
 
-
-
 gnostr-relay:build## 	gnostr-relay:build
 .PHONY:build
 gnostr-build:## 		cmake build gnostr-relay
 	cmake -S . -B build && cd build && cmake ../ && make
-
-
 
 
 deps/gnostr-legit/.git:
@@ -196,6 +192,16 @@ gnostr-legit:deps/gnostr-legit/target/release/gnostr-legit## 	gnostr-legit
 	cp $< $@ && exit;
 
 
+deps/gnostr-grep/.git:
+	@devtools/refresh-submodules.sh deps/gnostr-grep
+#.PHONY:deps/gnostr-grep/gnostr-grep
+deps/gnostr-grep/gnostr-grep:deps/gnostr-grep/.git
+	cd deps/gnostr-grep && \
+		make cargo-install
+deps/gnostr-grep/target/release/gnostr-grep:deps/gnostr-grep/gnostr-grep## 	gnostr-grep
+gnostr-grep:deps/gnostr-grep/target/release/gnostr-grep## 	gnostr-grep
+	cp $< $@ && exit;
+
 
 deps/gnostr-sha256/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-sha256
@@ -206,6 +212,7 @@ deps/gnostr-sha256/gnostr-sha256:deps/gnostr-sha256/.git
 deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256/gnostr-sha256## 	gnostr-sha256
 .PHONY:
 gnostr-sha256:deps/gnostr-sha256/target/release/gnostr-sha256
+
 
 deps/gnostr-proxy/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-proxy
@@ -253,6 +260,7 @@ libtclstub.a:deps/tcl/unix/libtclstub.a## 	deps/tcl/unix/libtclstub.a
 ##	./autogen.sh configure && ./configure && make install
 tcl-unix:libtclstub.a## 	deps/tcl/unix/libtclstub.a
 
+
 deps/gnostr-cat/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-cat
 #.PHONY:deps/gnostr-cat
@@ -271,6 +279,8 @@ deps/gnostr-cat/target/release/gnostr-cat:deps/gnostr-cat
 ##	make cargo-install
 gnostr-cat:deps/gnostr-cat/target/release/gnostr-cat## 	gnostr-cat
 
+
+
 deps/hyper-sdk/.git:
 	@devtools/refresh-submodules.sh deps/hyper-sdk
 deps/hyper-nostr/.git:
@@ -283,6 +293,8 @@ deps/gnostr-aio/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-aio
 deps/act/.git:
 	@devtools/refresh-submodules.sh deps/act
+
+
 
 %.o: %.c $(HEADERS)
 	@echo "cc $<"
@@ -326,6 +338,7 @@ gnostr-install:
 install-doc:## 	install-doc
 ## 	install -m 0644 -vC doc/gnostr.1 $(PREFIX)/share/man/man1/gnostr.1
 	@install -m 0644 -vC doc/gnostr.1 $(PREFIX)/share/man/man1/gnostr.1 || echo "doc/gnostr.1 failed to install..."
+	@install -m 0644 -vC doc/gnostr-gnode.1 $(PREFIX)/share/man/man1/gnostr-gnode.1 || echo "doc/gnostr.1 failed to install..."
 
 .PHONY:config.h
 gnostr-config.h: configurator
