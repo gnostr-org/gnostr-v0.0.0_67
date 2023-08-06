@@ -34,6 +34,9 @@ gnostr-repo
 gnostr-sha256
 gnostr-sha256-test
 gnostr-tests
+gnostr-grep
+gnostr-get-relays
+gnostr-set-relays
 
 libnostr.a
 

@@ -197,6 +197,9 @@ add_executable(gnostr-client src/wss_client.cc)
 add_executable(gnostr-req src/wss_req.cc)
 add_executable(gnostr-gnode src/wss_relay.cc)
 
+add_executable(gnostr-set-relays template/gnostr-set-relays.c)
+add_executable(gnostr-get-relays template/gnostr-get-relays.c)
+
 target_link_libraries (gnostr-client ${lib_dep})
 target_link_libraries (gnostr-req ${lib_dep})
 target_link_libraries (gnostr-gnode ${lib_dep})
@@ -285,6 +288,20 @@ install(TARGETS gnostr-req
         CONFIGURATIONS Debug
         RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
 install(TARGETS gnostr-req
+        CONFIGURATIONS Release
+        RUNTIME DESTINATION /usr/local/bin)
+
+install(TARGETS gnostr-set-relays
+        CONFIGURATIONS Debug
+        RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
+install(TARGETS gnostr-set-relays
+        CONFIGURATIONS Release
+        RUNTIME DESTINATION /usr/local/bin)
+
+install(TARGETS gnostr-get-relays
+        CONFIGURATIONS Debug
+        RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
+install(TARGETS gnostr-get-relays
         CONFIGURATIONS Release
         RUNTIME DESTINATION /usr/local/bin)
 

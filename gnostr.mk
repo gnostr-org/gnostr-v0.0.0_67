@@ -85,6 +85,7 @@ chmod:## 	chmod
 ##*.sh template/gnostr-* executables
 #find . -type f -name '*.sh' -name 'template/gnostr-*' -maxdepth 2
 	find . -type f -name '*.sh' -name 'template/gnostr-*' -maxdepth 2 | xargs -0 chmod +rwx
+#	find . -type f -name 'gnostr-**' -name 'template/gnostr-*' -maxdepth 2 | xargs -0 chmod +rwx
 ##not deps not configurator* not .venv
 #find . -type d ! -name 'deps' ! -name 'configurator*' ! -name '.venv' -print0 -maxdepth 1
 	find . -type d ! -name 'deps' ! -name 'configurator*' ! -name '.venv' -print0 -maxdepth 1 | xargs -0 chmod 0755
@@ -171,9 +172,11 @@ deps/gnostr-git/gnostr-git:deps/gnostr-git/.git
 	cd deps/gnostr-git && make && make install
 gnostr-git:deps/gnostr-git/gnostr-git## 	gnostr-git
 
-.PHONY:
-gnostr-get-relays:
-	$(CC) ./template/gnostr-get-relays.c -o gnostr-get-relays
+##.PHONY:gnostr-get-relays gnostr-set-relays
+##gnostr-get-relays:
+##	$(CC) ./template/gnostr-get-relays.c -o gnostr-get-relays
+##gnostr-set-relays:
+##	$(CC) ./template/gnostr-set-relays.c -o gnostr-set-relays
 
 gnostr-relay:build## 	gnostr-relay:build
 .PHONY:build
