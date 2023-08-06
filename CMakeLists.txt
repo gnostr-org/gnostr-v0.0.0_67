@@ -314,3 +314,6 @@ file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-query" DESTINATION /usr/local/bin
 
 message(STATUS "Copying deps/gnostr-proxy/gnostr-proxy to /usr/local/bin")
 file(COPY "${CMAKE_SOURCE_DIR}/deps/gnostr-proxy/gnostr-proxy" DESTINATION /usr/local/bin)
+
+message(STATUS "Copying gnostr-tests to /usr/local/bin")
+file(COPY "${CMAKE_SOURCE_DIR}/gnostr-tests" DESTINATION /usr/local/bin)
