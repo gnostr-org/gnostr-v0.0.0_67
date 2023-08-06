@@ -205,11 +205,11 @@ target_link_libraries (gnostr-req ${lib_dep})
 target_link_libraries (gnostr-gnode ${lib_dep})
 
 #//////////////////////////
-# tests
+# gnostr-tests
 #//////////////////////////
 
-add_executable(tests test/tests.cc)
-target_link_libraries (tests ${lib_dep})
+add_executable(gnostr-tests test/tests.cc)
+target_link_libraries (gnostr-tests ${lib_dep})
 
 #//////////////////////////
 # examples
