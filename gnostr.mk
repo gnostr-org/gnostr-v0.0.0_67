@@ -326,7 +326,7 @@ gnostr:$(HEADERS) $(GNOSTR_OBJS) $(ARS)## 	make gnostr binary
 .ONESHELL:
 ##install all
 ##	install docs/gnostr.1 gnostr gnostr-query
-gnostr-install:
+install-all:
 	mkdir -p $(PREFIX)/bin
 	mkdir -p $(PREFIX)/include
 	shopt -s extglob && install -m755 -vC include/*.*           ${PREFIX}/include 2>/dev/null
@@ -334,6 +334,7 @@ gnostr-install:
 	shopt -s extglob && install -m755 -vC template/gnostr-get-relays     $(PREFIX)/bin     2>/dev/null
 	shopt -s extglob && install -m755 -vC template/gnostr-set-relays     $(PREFIX)/bin     2>/dev/null
 	shopt -s extglob && install -m755 -vC template/gnostr-*-*            $(PREFIX)/bin     2>/dev/null
+	$(MAKE) install
 
 .ONESHELL:
 ##install-doc
