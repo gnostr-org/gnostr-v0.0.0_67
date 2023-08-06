@@ -270,6 +270,9 @@ endif()
 # Install
 #//////////////////////////
 
+message(STATUS "Copying gnostr to /usr/local/bin")
+file(COPY "${CMAKE_SOURCE_DIR}/gnostr" DESTINATION /usr/local/bin)
+
 install(TARGETS gnostr-gnode
         CONFIGURATIONS Debug
         RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin)
@@ -305,4 +308,9 @@ install(TARGETS gnostr-get-relays
         CONFIGURATIONS Release
         RUNTIME DESTINATION /usr/local/bin)
 
+message(STATUS "Copying template scripts to /usr/local/bin")
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-relays" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-query" DESTINATION /usr/local/bin)
 
+message(STATUS "Copying deps/gnostr-proxy/gnostr-proxy to /usr/local/bin")
+file(COPY "${CMAKE_SOURCE_DIR}/deps/gnostr-proxy/gnostr-proxy" DESTINATION /usr/local/bin)
