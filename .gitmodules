@@ -105,3 +105,6 @@
 	branch = master
 	ignore = dirty
 	shallow = true
+[submodule "deps/gnostr-cli"]
+	path = deps/gnostr-cli
+	url = https://github.com/gnostr-org/gnostr-cli.git
