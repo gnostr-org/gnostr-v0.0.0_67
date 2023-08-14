@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 message(STATUS "Windows static build: " ${STATIC_MSVC})
+=======
+message("-- nostr_client_relay static build: " ${BUILD_STATIC})
+>>>>>>> bc0fa50d7 (init: commit)
 message(STATUS "Source directory is " ${CMAKE_SOURCE_DIR})
 message(STATUS "Build directory is " ${CMAKE_CURRENT_BINARY_DIR})
 
@@ -13,7 +17,10 @@ if (LINUX)
   add_definitions(-D__WXGTK__)
   link_directories(${CMAKE_BINARY_DIR}/ext/wxWidgets-3.2.2.1/lib)
   include_directories(${CMAKE_BINARY_DIR}/ext/wxWidgets-3.2.2.1/lib/wx/include/gtk3-unicode-static-3.2)
+<<<<<<< HEAD
   include_directories(${CMAKE_BINARY_DIR}/ext/wxWidgets-3.2.2.1/lib/wx/include/gtk3-unicode-static-3.3)
+=======
+>>>>>>> bc0fa50d7 (init: commit)
 endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/ext/wxWidgets-3.2.2.1/include)
@@ -53,8 +60,13 @@ add_executable(gnostro WIN32 MACOSX_BUNDLE ${src_extra})
 #//////////////////////////
 
 if (MSVC)
+<<<<<<< HEAD
   set(lib_dep ${lib_dep} wxbase33ud wxmsw33ud_core wxmsw33ud_webview wxbase33ud_net wxpngd wxzlibd wxregexud wxmsw33ud_html)
   set(lib_dep ${lib_dep} wxscintillad wxlexillad wxmsw33ud_stc)
+=======
+  set(lib_dep ${lib_dep} wxbase32ud wxmsw32ud_core wxmsw32ud_webview wxbase32ud_net wxpngd wxzlibd wxregexud wxmsw32ud_html)
+  set(lib_dep ${lib_dep} wxscintillad wxmsw32ud_stc)
+>>>>>>> bc0fa50d7 (init: commit)
   set(lib_dep ${lib_dep} odbc32.lib odbccp32.lib comctl32.lib rpcrt4.lib ws2_32.lib)
 endif()
 

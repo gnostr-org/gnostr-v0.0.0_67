@@ -4,6 +4,10 @@ else
 PROJECT_NAME                            := $(project)
 endif
 export PROJECT_NAME
+VERSION                                 :=$(shell cat version)
+export VERSION
+TIME                                    :=$(shell date +%s)
+export TIME
 
 OS                                      :=$(shell uname -s)
 export OS
@@ -25,6 +29,14 @@ export TRIPLET
 endif
 
 CLANG=$(shell which clang)
+HOMEBREW                                :=$(shell which brew || false)
+
+ifeq ($(verbose),true)
+VERBOSE                                 :=-v
+else
+VERBOSE                                 :=
+endif
+export VERBOSE
 
 ifeq ($(reuse),true)
 REUSE                                   :=-r
@@ -40,9 +52,9 @@ endif
 export BIND
 
 ifeq ($(token),)
-GITHUB_TOKEN                        :=$(shell cat ~/GITHUB_TOKEN.txt || echo "0")
+GITHUB_TOKEN                            :=$(shell cat ~/GITHUB_TOKEN.txt || echo "0")
 else
-GITHUB_TOKEN                        :=$(shell echo $(token))
+GITHUB_TOKEN                            :=$(shell echo $(token))
 endif
 export GITHUB_TOKEN
 
@@ -129,19 +141,62 @@ export GIT_REPO_NAME
 GIT_REPO_PATH                           := $(HOME)/$(GIT_REPO_NAME)
 export GIT_REPO_PATH
 
+
 .PHONY:- help
 -:
-	@awk 'BEGIN {FS = ":.*?###"} /^[a-zA-Z_-]+:.*?###/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
-help-verbose:###	more verbose help
-	@awk 'BEGIN {FS = ":.*?##"} /^[a-zA-Z_-]+:.*?##/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?##/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+helpp:## 	
+	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/ /'
 
-report:###	report
+-include Makefile
+
+##initialize
+##	git submodule update --init --recursive
+initialize:## 	ensure submodules exist
+	git submodule update --init --recursive
+
+detect:
+##detect
+##	detect uname -s uname -m uname -p
+	@[[ '$(shell uname -s)' == 'Darwin' ]] && \
+		echo "is Darwin" || \
+		echo "not Darwin";
+	@[[ '$(shell uname -s)' == 'Linux'* ]] && \
+		echo "is Linux" || \
+		echo "not Linux";
+	@[[ '$(shell uname -m)' == 'x86_64' ]] && \
+		echo "is x86_64" || \
+		echo "not x86_64";
+	@[[ '$(shell uname -p)' == 'i386' ]]   && \
+		echo "is i386" || \
+		echo "not i386";
+
+.PHONY: report
+report:## 	
 	@echo ''
+	@echo 'TIME=${TIME}'
 	@echo 'PROJECT_NAME=${PROJECT_NAME}'
+	@echo 'VERSION=${VERSION}'
 	@echo ''
-	@echo 'CLANG=${CLANG}'
+	@echo 'OS=${OS}'
+	@echo 'OS_VERSION=${OS_VERSION}'
+	@echo 'ARCH=${ARCH}'
+	@echo ''
+	@echo 'PYTHON=${PYTHON}'
+	@echo 'PYTHON2=${PYTHON2}'
+	@echo 'PYTHON3=${PYTHON3}'
+	@echo ''
+	@echo 'PIP=${PIP}'
+	@echo 'PIP2=${PIP2}'
+	@echo 'PIP3=${PIP3}'
+	@echo ''
+	@echo 'PYTHON_VENV=${PYTHON_VENV}'
+	@echo 'PYTHON3_VENV=${PYTHON3_VENV}'
 	@echo ''
 	@echo 'GIT_USER_NAME=${GIT_USER_NAME}'
+	@echo 'GH_USER_REPO=${GH_USER_REPO}'
+	@echo 'GH_USER_SPECIAL_REPO=${GH_USER_SPECIAL_REPO}'
+	@echo 'KB_USER_REPO=${KB_USER_REPO}'
 	@echo 'GIT_USER_EMAIL=${GIT_USER_EMAIL}'
 	@echo 'GIT_SERVER=${GIT_SERVER}'
 	@echo 'GIT_PROFILE=${GIT_PROFILE}'
@@ -155,9 +210,6 @@ report:###	report
 extra:## 	additional
 ##extra
 	@echo "example: add additional make commands"
-submodules:###	recursively initialize git submodules
-##submodules
-	git submodule update --init --recursive || echo "install git..."
 
 cmake:submodules## 	cmake .
 ##cmake
@@ -174,6 +226,24 @@ ext/openssl:
 openssl:ext/openssl cmake## 	openssl
 ##openssl
 
-## include Makefile if exists
--include Makefile
+checkbrew:## 	checkbrew
+ifeq ($(HOMEBREW),)
+	@/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+	@type -P brew && brew install wxWidgets openssl@3.0 gettext
+endif
+
+tag:## 	git tag & git push
+tags:tag
+##tag
+##	git tag v$(VERSION)-$(OS)-$(OS_VERSION)-$(ARCH)-$(shell date +%s)
+	@git tag v$(VERSION)-$(OS)-$(OS_VERSION)-$(ARCH)-$(shell date +%s)
+	@git push -f --tags || echo "unable to push tags..."
+
+-include gnostr.mk
+-include venv.mk
 -include act.mk
+-include clean.mk
+
+# vim: set noexpandtab:
+# vim: set setfiletype make

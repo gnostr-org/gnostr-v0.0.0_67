@@ -11,7 +11,11 @@
 #include "relay.hh"
 
 using WssServer = SimpleWeb::SocketServer<SimpleWeb::WSS>;
+<<<<<<< HEAD
 std::string log_program_name("vostro");
+=======
+std::string log_program_name("gnostr-gnode");
+>>>>>>> bc0fa50d7 (init: commit)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // main

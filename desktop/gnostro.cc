@@ -9,6 +9,10 @@ using WssClient = SimpleWeb::SocketClient<SimpleWeb::WSS>;
 std::string log_program_name("gnostro");
 wxSize frame_size;
 const std::string def_pubkey("4ea843d54a8fdab39aa45f61f19f3ff79cc19385370f6a272dda81fade0a052b");
+<<<<<<< HEAD
+=======
+void get_feed(const std::string& pubkey, const std::string& uri, std::vector<std::string>& response);
+>>>>>>> bc0fa50d7 (init: commit)
 
 std::string pubkey;
 
@@ -239,7 +243,11 @@ void wxFrameMain::OnButtonGetFeed(wxCommandEvent& event)
   pubkey = panel->m_text_key->GetValue().ToStdString();
 
   std::vector<std::string> response;
+<<<<<<< HEAD
   nostr::get_events(pubkey, uri, response);
+=======
+  get_feed(pubkey, uri, response);
+>>>>>>> bc0fa50d7 (init: commit)
   this->CreateGrid(response);
 
 }
@@ -408,3 +416,65 @@ void GridResponse::OnSelectCell(wxGridEvent& ev)
   }
   ev.Skip();
 }
+<<<<<<< HEAD
+=======
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//get_feed
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void get_feed(const std::string& pubkey, const std::string& uri, std::vector<std::string>& response)
+{
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+  // get_follows returns an array of pubkeys 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  std::vector<std::string> pubkeys;
+  nostr::get_follows(uri, pubkey, pubkeys);
+  comm::to_file("pubkeys.txt", pubkeys);
+
+  for (int idx_key = 0; idx_key < pubkeys.size(); idx_key++)
+  {
+    std::string pubkey = pubkeys.at(idx_key);
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // get feed returns an array of JSON events 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    std::vector<std::string> events;
+    if (nostr::get_feed(uri, pubkey, events) < 0)
+    {
+    }
+
+    int row = 0;
+    for (int idx_eve = 0; idx_eve < events.size(); idx_eve++)
+    {
+      std::string message = events.at(idx_eve);
+      try
+      {
+        nlohmann::json js = nlohmann::json::parse(message);
+        std::string type = js.at(0);
+        if (type.compare("EVENT") == 0)
+        {
+          nostr::event_t ev;
+          from_json(js.at(2), ev);
+          std::string json = js.dump(1);
+
+          response.push_back(json);
+
+          std::stringstream s;
+          s << "follow." << row + 1 << ".json";
+          comm::json_to_file(s.str(), json);
+          row++;
+        }
+      }
+      catch (const std::exception& e)
+      {
+        comm::log(e.what());
+      }
+    } //events
+  } //pubkeys
+
+}
+>>>>>>> bc0fa50d7 (init: commit)

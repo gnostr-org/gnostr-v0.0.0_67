@@ -11,7 +11,11 @@
 #include "log.hh"
 #include "nostr.hh"
 
+<<<<<<< HEAD
 std::string log_program_name("tests");
+=======
+std::string log_program_name("gnostr-tests");
+>>>>>>> bc0fa50d7 (init: commit)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // prototypes
@@ -28,6 +32,10 @@ std::vector<std::string> relays = { "eden.nostr.land",
   "relay.snort.social",
   "relay.damus.io",
   "nostr.wine",
+<<<<<<< HEAD
+=======
+  "0.0.0.0:6102"
+>>>>>>> bc0fa50d7 (init: commit)
 };
 
 std::vector<std::string> list = { "list_01.txt",

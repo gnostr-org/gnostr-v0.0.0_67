@@ -569,6 +569,7 @@ int nostr::get_metadata(const std::string& uri, const std::string& pubkey, std::
   }
 
   return 0;
+<<<<<<< HEAD
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -605,4 +606,6 @@ void nostr::get_events(const std::string& pubkey, const std::string& uri, std::v
     }
   }
 
+=======
+>>>>>>> bc0fa50d7 (init: commit)
 }

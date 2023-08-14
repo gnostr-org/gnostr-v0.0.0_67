@@ -134,8 +134,11 @@ namespace nostr
   int get_follows(const std::string& uri, const std::string& pubkey, std::vector<std::string>& pubkeys);
   int get_feed(const std::string& uri, const std::string& pubkey, std::vector<std::string>& response);
   int get_metadata(const std::string& uri, const std::string& pubkey, std::vector<std::string>& response);
+<<<<<<< HEAD
 
   void get_events(const std::string& pubkey, const std::string& uri, std::vector<std::string>& response);
+=======
+>>>>>>> bc0fa50d7 (init: commit)
 }
 
 
