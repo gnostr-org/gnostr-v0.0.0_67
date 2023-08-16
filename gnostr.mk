@@ -238,7 +238,7 @@ deps/gnostr-proxy/.git:
 .PHONY:deps/gnostr-proxy
 deps/gnostr-proxy:deps/gnostr-proxy/.git
 	cd deps/gnostr-proxy && \
-		make run
+		make install
 gnostr-proxy:deps/gnostr-proxy
 	cat deps/gnostr-proxy/public/assets/entrypoints.json
 
