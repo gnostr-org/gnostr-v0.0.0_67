@@ -118,7 +118,7 @@ dist-test:submodules dist## 	dist-test
 		$(GTAR) -tvf gnostr-$(VERSION)-$(OS)-$(ARCH).tar > gnostr-$(VERSION)-$(OS)-$(ARCH).tar.txt
 	cd dist && \
 		$(GTAR) -xf  gnostr-$(VERSION)-$(OS)-$(ARCH).tar && \
-		cd  gnostr-$(VERSION)-$(OS)-$(ARCH) && cmake . && make cmake-all
+		cd  gnostr-$(VERSION)-$(OS)-$(ARCH) && make gnostr && cmake . && make gnostr-tests cmake-all gnostr-set-relays gnostr-get-relays  gnostr-tests
 diff-log:
 	@mkdir -p tests && diff template/gnostr-git-reflog template/gnostr-git-log > tests/diff.log || \
 		git diff tests/diff.log

@@ -19,6 +19,7 @@
 [submodule "gnostr-cat"]
 	path = deps/gnostr-cat
 	url = https://github.com/gnostr-org/gnostr-cat.git
+	branch = master
 	ignore = dirty
 	shallow = true
 [submodule "deps/gnostr-aio"]
@@ -132,3 +133,5 @@
 [submodule "deps/gnostr-icons"]
 	path = deps/gnostr-icons
 	url = https://github.com/gnostr-org/gnostr-icons.git
+	ignore = dirty
+	shallow = true
