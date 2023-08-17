@@ -38,9 +38,12 @@ endif
 export GTAR
 
 
-##all:
-#all: submodules gnostr gnostr-cat gnostr-git gnostr-relay gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-docs
-all: submodules gnostr gnostr-git gnostr-relay gnostr-get-relays gnostr-set-relays gnostr-cli gnostr-proxy gnostr-legit gnostr-act gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-act gnostr-xor gnostr-docs
+##cmake-all:
+#cmake-all: submodules gnostr gnostr-cat gnostr-git gnostr-relay gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-docs
+cmake-all:
+	$(shell which cmake) .
+	$(MAKE) submodules gnostr gnostr-git gnostr-relay gnostr-get-relays gnostr-set-relays gnostr-cli gnostr-proxy gnostr-legit gnostr-act gnostr-docs
+## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-act gnostr-xor gnostr-docs
 ##	build gnostr tool and related dependencies
 
 ##gnostr-docs:
@@ -115,7 +118,7 @@ dist-test:submodules dist## 	dist-test
 		$(GTAR) -tvf gnostr-$(VERSION)-$(OS)-$(ARCH).tar > gnostr-$(VERSION)-$(OS)-$(ARCH).tar.txt
 	cd dist && \
 		$(GTAR) -xf  gnostr-$(VERSION)-$(OS)-$(ARCH).tar && \
-		cd  gnostr-$(VERSION)-$(OS)-$(ARCH) && cmake . && make all
+		cd  gnostr-$(VERSION)-$(OS)-$(ARCH) && cmake . && make cmake-all
 diff-log:
 	@mkdir -p tests && diff template/gnostr-git-reflog template/gnostr-git-log > tests/diff.log || \
 		git diff tests/diff.log
