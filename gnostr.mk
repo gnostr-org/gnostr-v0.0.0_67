@@ -118,7 +118,7 @@ dist-test:submodules dist## 	dist-test
 		$(GTAR) -tvf gnostr-$(VERSION)-$(OS)-$(ARCH).tar > gnostr-$(VERSION)-$(OS)-$(ARCH).tar.txt
 	cd dist && \
 		$(GTAR) -xf  gnostr-$(VERSION)-$(OS)-$(ARCH).tar && \
-		cd  gnostr-$(VERSION)-$(OS)-$(ARCH) && cmake . && make cmake-all
+		cd  gnostr-$(VERSION)-$(OS)-$(ARCH) && make gnostr && cmake . && make gnostr-tests cmake-all gnostr-set-relays gnostr-get-relays  gnostr-tests
 diff-log:
 	@mkdir -p tests && diff template/gnostr-git-reflog template/gnostr-git-log > tests/diff.log || \
 		git diff tests/diff.log
@@ -128,7 +128,7 @@ diff-log:
 	@gnostr-git-reflog -h > tests/gnostr-git-reflog-h.log
 	@gnostr-relay -h > tests/gnostr-relay-h.log
 .PHONY:submodules
-submodules:deps/secp256k1/.git deps/gnostr-git/.git deps/gnostr-cat/.git deps/hyper-sdk/.git deps/hyper-nostr/.git deps/gnostr-aio/.git deps/gnostr-py/.git deps/gnostr-act/.git deps/gnostr-legit/.git deps/gnostr-proxy/.git deps/gnostr-act/.git## 	refresh-submodules
+submodules:deps/secp256k1/.git deps/gnostr-git/.git deps/gnostr-cat/.git deps/gnostr-aio/.git deps/gnostr-py/.git deps/gnostr-act/.git deps/gnostr-legit/.git deps/gnostr-proxy/.git deps/gnostr-act/.git## 	refresh-submodules
 	git submodule update --init --recursive
 
 .PHONY:deps/secp256k1/config.log

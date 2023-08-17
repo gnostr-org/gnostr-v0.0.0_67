@@ -4,22 +4,10 @@
 	branch = master
 	ignore = dirty
 	shallow = true
-[submodule "deps/hyper-nostr"]
-	path = deps/hyper-nostr
-	url = https://github.com/gnostr-org/hyper-nostr.git
-	branch = master
-	ignore = dirty
-	shallow = true
 [submodule "deps/act"]
 	path = deps/act
 	url = https://github.com/gnostr-org/act.git
 	branch = master
-	ignore = dirty
-	shallow = true
-[submodule "deps/hyper-sdk"]
-	path = deps/hyper-sdk
-	url = https://github.com/gnostr-org/hyper-sdk.git
-	branch = 38db824808be1bffae4ca3bc76051aaadc1b6b82
 	ignore = dirty
 	shallow = true
 [submodule "gnostr-cat"]
