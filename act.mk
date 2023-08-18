@@ -1,6 +1,6 @@
-act-install:## 	install act from deps/act/install.sh -b
-	@git submodule update --init --recursive  deps/act
-	./deps/act/install.sh -b /usr/local/bin && exec bash
+act-install:## 	install act from deps/gnostr-act/install.sh -b
+	@git submodule update --init --recursive  deps/gnostr-act
+	./deps/gnostr-act/install.sh -b /usr/local/bin && exec bash
 ubuntu-git:submodules docker-start## 	run act in .github
 	#we use -b to bind the repo to the act container
 	#in the single dep instances we reuse (-r) the container
