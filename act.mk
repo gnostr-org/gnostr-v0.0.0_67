@@ -36,19 +36,11 @@ docker-start:## 	start docker
 ## you can use the act -C <sub_folder> -W ...
 ## to change the context of the workflow
 
-## Try:
-## make ubuntu-matrix reuse=true bind=true
-ubuntu-matrix:submodules docker-start### 	run act/github workflow
-###ubuntu-matrix
-### 	TRY:
-### 	make ubuntu-matrix bind=true reuse=true verbose=true
-	@type -P act || echo -e "Install act local CI tool.\nTry:\napt install act or brew install act\n"
-	@export $(cat ~/gh_token.txt) && act -v $(REUSE) $(BIND) -C $(PWD)  -W $(PWD)/.github/workflows/$@.yml
 
 
-act-install:## 	install act from deps/act/install.sh -b
-	@git submodule update --init --recursive  deps/act
-	./deps/act/install.sh -b /usr/local/bin && exec bash
+act-install:## 	install act from deps/gnostr-act/install.sh -b
+	@git submodule update --init --recursive  deps/gnostr-act
+	./deps/gnostr-act/install.sh -b /usr/local/bin && exec bash
 ubuntu-git:submodules docker-start## 	run act in .github
 	#we use -b to bind the repo to the act container
 	#in the single dep instances we reuse (-r) the container
@@ -67,6 +59,14 @@ ubuntu-gnostr-cat:submodules docker-start## 	run act in .github
 	#in the single dep instances we reuse (-r) the container
 	type -P act && GITHUB_TOKEN=$(shell cat ~/GITHUB_TOKEN.txt) && act $(VERBOSE) $(BIND) $(REUSE) -W $(PWD)/.github/workflows/$@.yml || $(MAKE) act-install
 	#the matrix/pre/release builds are for the resulting app builds
+
+## Try:
+## make ubuntu-matrix reuse=true bind=true
+ubuntu-matrix:submodules docker-start### 	run act/github workflow
+##ubuntu-matrix
+## 	make ubuntu-matrix reuse=true bind=true verbose=true
+	@bash -c "export GITHUB_TOKEN=$(shell cat ~/GITHUB_TOKEN.txt) && echo $(GITHUB_TOKEN)"
+	type -P act && GITHUB_TOKEN=$(shell cat ~/GITHUB_TOKEN.txt) && act -v         $(BIND) $(REUSE) -W $(PWD)/.github/workflows/$@.yml || $(MAKE) act-install
 
 alpine-matrix:docker-start## 	run act in .github
 	@bash -c "export GITHUB_TOKEN=$(shell cat ~/GITHUB_TOKEN.txt) && echo $(GITHUB_TOKEN)"
