@@ -1,3 +1,10 @@
+!resources
+!test
+!database
+
+**.txt
+**.o
+
 http_relay
 cmake_install.cmake
 CMakeFiles/
@@ -5,17 +12,12 @@ http_client
 http_relayV
 nostro
 nostro.log.txt
-server.crt
-server.key
 vostro
 vostro.log.txt
-list_01.txt
-list_02.txt
 CHANGELOG
 KEYS
 GIT-VERSION-FILE
 !deps/git/config.*
-*.o
 /.direnv/
 .privenv
 
@@ -35,6 +37,13 @@ gnostr-tests
 gnostr-grep
 gnostr-get-relays
 gnostr-set-relays
+
+gnostr-cat
+gnostr-configurator
+gnostr-sha256
+server.crt
+server.key
+
 
 libnostr.a
 
@@ -79,6 +88,15 @@ ext/secp256k1-0.3.2/CTestTestfile.cmake
 ext/secp256k1-0.3.2/DartConfiguration.tcl
 ext/secp256k1-0.3.2/src/CTestTestfile.cmake
 deps/gnostr-proxy/resources/js/isomophic-git/__tests__/
+ext/openssl-3.0.5/test/recipes/65-test_cmp_client_data/server.crt
+ext/openssl-3.0.5/test/recipes/65-test_cmp_client_data/server.key
+ext/openssl-3.0.5/test/recipes/65-test_cmp_msg_data/server.crt
+ext/openssl-3.0.5/test/recipes/65-test_cmp_protect_data/server.crt
+ext/openssl-3.0.5/test/recipes/65-test_cmp_vfy_data/server.crt
+ext/openssl-3.0.5/test/recipes/65-test_cmp_vfy_data/server.key
+ext/openssl-3.0.5/test/recipes/80-test_cmp_http_data/Mock/server.crt
+ext/openssl-3.0.5/test/recipes/80-test_cmp_http_data/Mock/server.key
+
 
 libgit.a
 libjq.a

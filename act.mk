@@ -23,7 +23,7 @@ ubuntu-matrix:docker-start## 	run act in .github
 ##ubuntu-matrix
 ## 	make ubuntu-matrix reuse=true bind=true verbose=true
 	@bash -c "export GITHUB_TOKEN=$(shell cat ~/GITHUB_TOKEN.txt) && echo $(GITHUB_TOKEN)"
-	type -P act && GITHUB_TOKEN=$(shell cat ~/GITHUB_TOKEN.txt) && act -v         -b      $(REUSE) -W $(PWD)/.github/workflows/$@.yml || $(MAKE) act-install
+	type -P act && GITHUB_TOKEN=$(shell cat ~/GITHUB_TOKEN.txt) && act -v         $(BIND) $(REUSE) -W $(PWD)/.github/workflows/$@.yml || $(MAKE) act-install
 alpine-matrix:docker-start## 	run act in .github
 	@bash -c "export GITHUB_TOKEN=$(shell cat ~/GITHUB_TOKEN.txt) && echo $(GITHUB_TOKEN)"
 	type -P act && GITHUB_TOKEN=$(shell cat ~/GITHUB_TOKEN.txt) && act $(VERBOSE) $(BIND) $(REUSE) -W $(PWD)/.github/workflows/$@.yml || $(MAKE) act-install

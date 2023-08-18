@@ -56,25 +56,13 @@ jobs:
       - name: apt-get install
         run: |
           sudo apt-get update
-          sudo apt-get install -y autoconf automake bash build-essential gettext libcurl4-openssl-dev libtool make python3 python3-pip util-linux zlib1g-dev cmake g++ cargo
+          sudo apt-get install -y autoconf automake bash build-essential gettext libcurl4-openssl-dev libtool make python3 python3-pip util-linux zlib1g-dev cmake cargo
 
       - run: touch ~/GITHUB_TOKEN.txt
 
-      - run: cmake .
+      - run: make cmake-all
       - run: sudo make libsecp256k1.a
       - run: sudo make gnostr
-
-      - name: sudo make gnostr-cat
-        run: |
-      - run: sudo make gnostr-cat
-
-      - name: sudo make gnostr-legit
-        run: |
-      - run: sudo make gnostr-legit
-
-      #- name: sudo make gnostr-proxy
-      #  run: |
-      #- run: sudo make gnostr-proxy
 
       - name: Save deps
         id: cache-deps-save
