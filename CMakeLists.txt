@@ -245,6 +245,22 @@ if (NOT BUILD_MOBILE)
   target_link_libraries (gnostr-tests ${lib_dep})
 endif()
 
+
+##//////////////////////////
+## gnostr-set-relays
+##//////////////////////////
+#
+#add_executable(gnostr-set-relays src/gnostr-set-relays.c)
+#target_link_libraries (gnostr-set-relays ${lib_dep})
+#
+##//////////////////////////
+## gnostr-get-relays
+##//////////////////////////
+#
+#add_executable(gnostr-get-relays src/gnostr-get-relays.c)
+#target_link_libraries (gnostr-get-relays ${lib_dep})
+
+
 #//////////////////////////
 # examples
 #//////////////////////////
@@ -320,8 +336,8 @@ endif()
 # Install
 #//////////////////////////
 
-message(STATUS "Copying gnostr to /usr/local/bin")
-file(COPY "${CMAKE_SOURCE_DIR}/gnostr" DESTINATION /usr/local/bin)
+#message(STATUS "Copying gnostr to /usr/local/bin")
+#file(COPY "${CMAKE_SOURCE_DIR}/gnostr" DESTINATION /usr/local/bin)
 
 install(TARGETS gnostr-gnode
         CONFIGURATIONS Debug
@@ -382,5 +398,5 @@ file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-wobble" DESTINATION /usr/local/bi
 message(STATUS "Copying deps/gnostr-proxy/gnostr-proxy to /usr/local/bin")
 file(COPY "${CMAKE_SOURCE_DIR}/deps/gnostr-proxy/gnostr-proxy" DESTINATION /usr/local/bin)
 
-message(STATUS "Copying gnostr-tests to /usr/local/bin")
-file(COPY "${CMAKE_SOURCE_DIR}/gnostr-tests" DESTINATION /usr/local/bin)
+#message(STATUS "Copying gnostr-tests to /usr/local/bin")
+#file(COPY "${CMAKE_SOURCE_DIR}/gnostr-tests" DESTINATION /usr/local/bin)
