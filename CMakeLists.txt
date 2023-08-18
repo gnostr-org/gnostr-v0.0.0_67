@@ -197,8 +197,8 @@ add_executable(gnostr-client src/wss_client.cc)
 add_executable(gnostr-req src/wss_req.cc)
 add_executable(gnostr-gnode src/wss_relay.cc)
 
-add_executable(gnostr-set-relays template/gnostr-set-relays.c)
-add_executable(gnostr-get-relays template/gnostr-get-relays.c)
+add_executable(gnostr-set-relays src/gnostr-set-relays.c)
+add_executable(gnostr-get-relays src/gnostr-get-relays.c)
 
 target_link_libraries (gnostr-client ${lib_dep})
 target_link_libraries (gnostr-req ${lib_dep})
@@ -211,12 +211,28 @@ target_link_libraries (gnostr-gnode ${lib_dep})
 add_executable(gnostr-tests test/tests.cc)
 target_link_libraries (gnostr-tests ${lib_dep})
 
+
+##//////////////////////////
+## gnostr-set-relays
+##//////////////////////////
+#
+#add_executable(gnostr-set-relays src/gnostr-set-relays.c)
+#target_link_libraries (gnostr-set-relays ${lib_dep})
+#
+##//////////////////////////
+## gnostr-get-relays
+##//////////////////////////
+#
+#add_executable(gnostr-get-relays src/gnostr-get-relays.c)
+#target_link_libraries (gnostr-get-relays ${lib_dep})
+
+
 #//////////////////////////
 # examples
 #//////////////////////////
 if(UNIX AND NOT APPLE)
 add_executable(examples examples/examples.cc)
-target_link_libraries (examples ${l/ib_dep})
+target_link_libraries (examples ${lib_dep})
 endif()
 
 #//////////////////////////
@@ -270,8 +286,8 @@ endif()
 # Install
 #//////////////////////////
 
-message(STATUS "Copying gnostr to /usr/local/bin")
-file(COPY "${CMAKE_SOURCE_DIR}/gnostr" DESTINATION /usr/local/bin)
+#message(STATUS "Copying gnostr to /usr/local/bin")
+#file(COPY "${CMAKE_SOURCE_DIR}/gnostr" DESTINATION /usr/local/bin)
 
 install(TARGETS gnostr-gnode
         CONFIGURATIONS Debug
@@ -311,7 +327,7 @@ install(TARGETS gnostr-get-relays
 message(STATUS "Copying template scripts to /usr/local/bin")
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-add" DESTINATION /usr/local/bin)
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-blockheight" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-get-relays" DESTINATION /usr/local/bin)
+#file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-get-relays" DESTINATION /usr/local/bin)
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-git-log" DESTINATION /usr/local/bin)
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-git-reflog" DESTINATION /usr/local/bin)
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-nip0" DESTINATION /usr/local/bin)
@@ -322,7 +338,7 @@ file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-proxy-test" DESTINATION /usr/loca
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-query" DESTINATION /usr/local/bin)
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-relays" DESTINATION /usr/local/bin)
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-send" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-set-relays" DESTINATION /usr/local/bin)
+#file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-set-relays" DESTINATION /usr/local/bin)
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-syndication" DESTINATION /usr/local/bin)
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-syndication-test" DESTINATION /usr/local/bin)
 file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-weeble" DESTINATION /usr/local/bin)
@@ -332,5 +348,5 @@ file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-wobble" DESTINATION /usr/local/bi
 message(STATUS "Copying deps/gnostr-proxy/gnostr-proxy to /usr/local/bin")
 file(COPY "${CMAKE_SOURCE_DIR}/deps/gnostr-proxy/gnostr-proxy" DESTINATION /usr/local/bin)
 
-message(STATUS "Copying gnostr-tests to /usr/local/bin")
-file(COPY "${CMAKE_SOURCE_DIR}/gnostr-tests" DESTINATION /usr/local/bin)
+#message(STATUS "Copying gnostr-tests to /usr/local/bin")
+#file(COPY "${CMAKE_SOURCE_DIR}/gnostr-tests" DESTINATION /usr/local/bin)

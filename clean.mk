@@ -54,12 +54,12 @@ clean-tcl:## 	remove deps/tcl
 clean-jq:## 	remove deps/jq
 	cd deps/jq && find . -type f -name '*.o' -print0 | rm -f || echo
 
-##clean-openssl
-##	remove deps/openssl
-clean-openssl:## 	remove deps/openssl
-	cd deps/openssl && rm -rf gost-engine && rm -rf fuzz && find . -type f -name '*.o' -print0 | rm -f || echo
+###clean-openssl
+###	remove deps/openssl
+#clean-openssl:## 	remove deps/openssl
+#	cd deps/openssl && rm -rf gost-engine && rm -rf fuzz && find . -type f -name '*.o' -print0 | rm -f || echo
 
-clean-all:clean clean-hyper-nostr clean-secp clean-gnostr-git clean-openssl## 	clean clean-*
+clean-all:clean clean-hyper-nostr clean-secp clean-gnostr-git## 	clean clean-*
 ##clean-all
 ##	clean clean-hyper-nostr clean-secp clean-gnostr-git clean-tcl clean-jq
 	find . -type f -name '*.o' -print0 | rm -f
