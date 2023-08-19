@@ -88,7 +88,7 @@ chmod:## 	chmod
 ##*.sh template/gnostr-* executables
 #find . -type f -name '*.sh' -name 'template/gnostr-*' -maxdepth 2
 	find . -type f -name '*.sh' -name 'template/gnostr-*' -maxdepth 2 | xargs -0 chmod +rwx
-#	find . -type f -name 'gnostr-**' -name 'template/gnostr-*' -maxdepth 2 | xargs -0 chmod +rwx
+	find . -type f -name 'gnostr-**' -name 'template/gnostr-*' -maxdepth 2 | xargs -0 chmod +rwx
 ##not deps not configurator* not .venv
 #find . -type d ! -name 'deps' ! -name 'configurator*' ! -name '.venv' -print0 -maxdepth 1
 	find . -type d ! -name 'deps' ! -name 'configurator*' ! -name '.venv' -print0 -maxdepth 1 | xargs -0 chmod 0755
