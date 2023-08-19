@@ -13,11 +13,11 @@
 #include "uuid.hh"
 
 using WssClient = SimpleWeb::SocketClient<SimpleWeb::WSS>;
-std::string log_program_name("nostro");
+std::string log_program_name("gnostr-client");
 std::vector<std::string> store;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-// Nostro
+// gnostr-client
 // A Nostr client
 // --sec <hex seckey> --content hello --kind 1
 // --req --authors 4ea843d54a8fdab39aa45f61f19f3ff79cc19385370f6a272dda81fade0a052b
@@ -25,7 +25,7 @@ std::vector<std::string> store;
 
 void usage()
 {
-  std::cout << "./nostro [OPTIONS]" << std::endl;
+  std::cout << "gnostr-client [OPTIONS]" << std::endl;
   std::cout << "[OPTIONS]:" << std::endl;
   std::cout << "  --uri <wss URI>      Wss URI to send" << std::endl;
   std::cout << "  --req                message is a request (REQ). EVENT parameters are ignored" << std::endl;
@@ -115,7 +115,7 @@ int main(int argc, const char* argv[])
       filter.kinds.push_back(nostr::kind_1);
     }
     json = nostr::make_request(subscription_id, filter);
-    comm::json_to_file("nostro_request.json", json);
+    comm::json_to_file(".gnostr/gnostr_request.json", json);
   }
   else
   {
@@ -123,7 +123,7 @@ int main(int argc, const char* argv[])
     ev.content = content;
     ev.kind = kind;
     json = nostr::make_event(ev, seckey);
-    comm::json_to_file("nostro_event.json", json);
+    comm::json_to_file(".gnostr/gnostr_event.json", json);
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ int main(int argc, const char* argv[])
     ss << "Received: " << str;
     comm::log(ss.str());
     store.push_back(str);
-    comm::json_to_file("response.txt", str);
+    comm::json_to_file(".gnostr/response.txt", str);
 
     connection->send_close(1000);
   };

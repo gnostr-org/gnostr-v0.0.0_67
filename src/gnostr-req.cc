@@ -13,11 +13,11 @@
 #include "uuid.hh"
 
 using WssClient = SimpleWeb::SocketClient<SimpleWeb::WSS>;
-std::string log_program_name("nostro");
+std::string log_program_name("gnostr-req");
 std::vector<std::string> store;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-// Nostro
+// gnostr-req
 // A Nostr client
 // --sec <hex seckey> --content hello --kind 1
 // --req --authors 4ea843d54a8fdab39aa45f61f19f3ff79cc19385370f6a272dda81fade0a052b
