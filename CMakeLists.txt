@@ -219,14 +219,19 @@ endif()
 #//////////////////////////
 
 if (NOT BUILD_MOBILE)
+
   add_executable(nostro src/wss_client.cc)
   add_executable(vostro src/wss_relay.cc)
   target_link_libraries (nostro ${lib_dep})
   target_link_libraries (vostro ${lib_dep})
 
-  add_executable(gnostr-client src/wss_client.cc)
-  add_executable(gnostr-req src/wss_req.cc)
-  add_executable(gnostr-gnode src/wss_relay.cc)
+  add_executable(gnostr-client src/gnostr-client.cc)
+  add_executable(gnostr-req src/gnostr-req.cc)
+  add_executable(gnostr-gnode src/gnostr-gnode.cc)
+
+  #add_executable(gnostr-client src/wss_client.cc)
+  #add_executable(gnostr-req src/wss_req.cc)
+  #add_executable(gnostr-gnode src/wss_relay.cc)
 
   target_link_libraries (gnostr-client ${lib_dep})
   target_link_libraries (gnostr-req ${lib_dep})
