@@ -4,11 +4,17 @@
 
 #include "server_wss.hpp"
 #include <future>
+#include <iostream>
+#include <string>
+#include <algorithm>
+
 
 #include "log.hh"
 #include "nostr.hh"
 #include "database.hh"
 #include "relay.hh"
+#include "argparse.hpp"
+
 
 using WssServer = SimpleWeb::SocketServer<SimpleWeb::WSS>;
 <<<<<<< HEAD
@@ -21,14 +27,35 @@ std::string log_program_name("gnostr-gnode");
 // main
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int main()
+int main(int argc, char * argv[])
 {
-  comm::start_log();
+    comm::start_log();
+
+    argparse::ArgumentParser program("gnostr-gnode");
+    program.add_argument("port").default_value<int>(8080)
+        .help("gnostr-gnostr <port_number>")
+        .scan<'i', int>();
+    program.add_argument("--verbose").default_value(false).implicit_value(true);
+    try {
+        program.parse_args(argc, argv);
+    } catch (const std::runtime_error &err) {
+        std::cerr << err.what() << std::endl;
+        std::cerr << program;
+        return 1;
+    }
+    int port = program.get<int>("port");
+
+//  if (program["--verbose"] == true) {
+//    std::cout << "The square of " << input << " is " << (input * input)
+//              << std::endl;
+//  } else {
+//    std::cout << (input * input) << std::endl;
+//  }
 
   relay_t relay;
 
   WssServer server("server.crt", "server.key");
-  server.config.port = 8080;
+  server.config.port = port;
   auto& endpoint = server.endpoint["/"];
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
