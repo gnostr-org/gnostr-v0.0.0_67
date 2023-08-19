@@ -25,7 +25,7 @@ std::vector<std::string> store;
 
 void usage()
 {
-  std::cout << "./nostro [OPTIONS]" << std::endl;
+  std::cout << "gnostr-req [OPTIONS]" << std::endl;
   std::cout << "[OPTIONS]:" << std::endl;
   std::cout << "  --uri <wss URI>      Wss URI to send" << std::endl;
   std::cout << "  --req                message is a request (REQ). EVENT parameters are ignored" << std::endl;
