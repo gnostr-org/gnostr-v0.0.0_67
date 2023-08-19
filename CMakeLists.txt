@@ -350,3 +350,11 @@ install(TARGETS gnostr-get-relays
         CONFIGURATIONS Release
         RUNTIME DESTINATION /usr/local/bin)
 
+install(TARGETS gnostr-tests
+        CONFIGURATIONS Debug
+        RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
+install(TARGETS gnostr-tests
+        CONFIGURATIONS Release
+        RUNTIME DESTINATION /usr/local/bin)
+
+
