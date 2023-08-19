@@ -313,6 +313,32 @@ file(COPY "${CMAKE_SOURCE_DIR}/resources/server.crt" DESTINATION ${CMAKE_BINARY_
 file(COPY "${CMAKE_SOURCE_DIR}/database/database.json" DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY "${CMAKE_SOURCE_DIR}/resources/wt_config.xml" DESTINATION ${CMAKE_BINARY_DIR}/web)
 
+message(STATUS "Copying template scripts to /usr/local/bin")
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-add" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-blockheight" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-git-log" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-git-reflog" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-nip0" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-nonce" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-post" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-proxy" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-proxy-test" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-query" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-relays" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-send" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-syndication" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-syndication-test" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-weeble" DESTINATION /usr/local/bin)
+file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-wobble" DESTINATION /usr/local/bin)
+
+
+message(STATUS "Copying deps/gnostr-proxy/gnostr-proxy to /usr/local/bin")
+file(COPY "${CMAKE_SOURCE_DIR}/deps/gnostr-proxy/gnostr-proxy" DESTINATION /usr/local/bin)
+
+#message(STATUS "Copying gnostr-tests to /usr/local/bin")
+#file(COPY "${CMAKE_SOURCE_DIR}/gnostr-tests" DESTINATION /usr/local/bin)
+
+
 #//////////////////////////
 # Wt desktop
 #//////////////////////////
@@ -379,27 +405,3 @@ install(TARGETS gnostr-get-relays
         CONFIGURATIONS Release
         RUNTIME DESTINATION /usr/local/bin)
 
-message(STATUS "Copying template scripts to /usr/local/bin")
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-add" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-blockheight" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-git-log" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-git-reflog" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-nip0" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-nonce" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-post" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-proxy" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-proxy-test" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-query" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-relays" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-send" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-syndication" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-syndication-test" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-weeble" DESTINATION /usr/local/bin)
-file(COPY "${CMAKE_SOURCE_DIR}/template/gnostr-wobble" DESTINATION /usr/local/bin)
-
-
-message(STATUS "Copying deps/gnostr-proxy/gnostr-proxy to /usr/local/bin")
-file(COPY "${CMAKE_SOURCE_DIR}/deps/gnostr-proxy/gnostr-proxy" DESTINATION /usr/local/bin)
-
-#message(STATUS "Copying gnostr-tests to /usr/local/bin")
-#file(COPY "${CMAKE_SOURCE_DIR}/gnostr-tests" DESTINATION /usr/local/bin)
