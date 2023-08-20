@@ -56,6 +56,7 @@ endif()
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/nostril)
 include_directories(${CMAKE_SOURCE_DIR}/src/nostril)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
 include_directories(src)
 
