@@ -2,6 +2,7 @@
 #.git folder itself AND to NOT ignore the deps folder.
 !.git
 !deps
-database/database.json
-resources/server.crt
-resources/server.key
+!ext
+!CMakeLists.txt
+!database/**
+!resources/**

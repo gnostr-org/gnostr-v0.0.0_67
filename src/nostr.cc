@@ -445,7 +445,7 @@ int nostr::get_follows(const std::string& uri, const std::string& pubkey, std::v
   filter.kinds.push_back(nostr::kind_3);
   filter.limit = 1;
   std::string json = nostr::make_request(subscription_id, filter);
-  comm::json_to_file("follows_request.json", json);
+  comm::json_to_file(".gnostr/follows_request.json", json);
   if (nostr::relay_to(uri, json, responses) < 0)
   {
   }
@@ -463,7 +463,7 @@ int nostr::get_follows(const std::string& uri, const std::string& pubkey, std::v
         nostr::event_t ev;
         from_json(js.at(2), ev);
         subs_events.push_back(ev);
-        comm::json_to_file("follows_event.json", message);
+        comm::json_to_file(".gnostr/follows_event.json", message);
       }
     }
     catch (const std::exception& e)
@@ -513,7 +513,7 @@ int nostr::get_feed(const std::string& uri, const std::string& pubkey, std::vect
   filter.kinds.push_back(nostr::kind_1);
   filter.limit = 2;
   std::string json = nostr::make_request(subscription_id, filter);
-  comm::json_to_file("req_feed.json", json);
+  comm::json_to_file(".gnostr/req_feed.json", json);
 
   std::vector<std::string> messages;
   if (nostr::relay_to(uri, json, messages) < 0)
@@ -532,7 +532,7 @@ int nostr::get_feed(const std::string& uri, const std::string& pubkey, std::vect
         nostr::event_t ev;
         from_json(js.at(2), ev);
         response.push_back(message);
-        comm::json_to_file("follows_event.json", message);
+        comm::json_to_file(".gnostr/follows_event.json", message);
       }
     }
     catch (const std::exception& e)
@@ -555,7 +555,7 @@ int nostr::get_metadata(const std::string& uri, const std::string& pubkey, std::
   filter.authors.push_back(pubkey);
   filter.kinds.push_back(nostr::kind_0);
   std::string json = nostr::make_request(subscription_id, filter);
-  comm::json_to_file("req_metadata.json", json);
+  comm::json_to_file(".gnostr/req_metadata.json", json);
 
   std::vector<std::string> messages;
   if (nostr::relay_to(uri, json, messages) < 0)

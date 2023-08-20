@@ -33,7 +33,7 @@ int main()
     filter.limit = 1;
     std::string json = nostr::make_request(subscription_id, filter);
 
-    comm::json_to_file("request.json", json);
+    comm::json_to_file(".gnostr/request.json", json);
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +107,7 @@ int main()
     std::string uri = "nos.lol";
     std::vector<std::string> response;
     nostr::relay_to(uri, json, response);
-    comm::to_file("response.txt", response);
+    comm::to_file(".gnostr/response.txt", response);
     for (int idx = 0; idx < response.size(); idx++)
     {
       std::string message = response.at(idx);
@@ -125,7 +125,7 @@ int main()
     ev.content = "hello world";
     ev.kind = 1;
     std::string json = nostr::make_event(ev, seckey);
-    comm::json_to_file("event.json", json);
+    comm::json_to_file(".gnostr/event.json", json);
   }
 
 
@@ -138,7 +138,7 @@ int main()
     std::string uri = "nos.lol";
     const std::string pubkey("4ea843d54a8fdab39aa45f61f19f3ff79cc19385370f6a272dda81fade0a052b");
     nostr::get_follows(uri, pubkey, pubkeys);
-    comm::to_file("pubkeys.txt", pubkeys);
+    comm::to_file(".gnostr/pubkeys.txt", pubkeys);
 
     for (int idx_key = 0; idx_key < pubkeys.size(); idx_key++)
     {
