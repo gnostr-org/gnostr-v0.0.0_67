@@ -67,9 +67,7 @@ jobs:
 
       - run: touch ~/GITHUB_TOKEN.txt
 
-      - run: make cmake-all
-      - run: sudo make libsecp256k1.a
-      - run: sudo make gnostr
+      - run: make cmake-all install
 
       - name: Save deps
         id: cache-deps-save
