@@ -816,7 +816,17 @@ int main(int argc, const char *argv[])
 			return 4;
 		}
 		fprintf(stderr, "secret_key ");
-		//print_hex(key.secret, sizeof(key.secret));
+
+//gnostr should print the secret_key when it mines an event id or pubkey
+//
+//gnostr               --pow 16 --content "nonce 16" --dm a34b99f22c790c4e36b2b3c2c35a36db06226e41c692fc82b8b56ac1c540c5bd
+//gnostr --mine-pubkey --pow 16 --content "nonce 16" --dm a34b99f22c790c4e36b2b3c2c35a36db06226e41c692fc82b8b56ac1c540c5bd
+
+//when --sec <string> is provided - gnostr doesnt print the secret_key
+//this logic should be preserved.
+
+//gnostr --mine-pubkey --pow 16 --content "nonce 16" --sec $(gnostr sha256) --dm a34b99f22c790c4e36b2b3c2c35a36db06226e41c692fc82b8b56ac1c540c5bd
+		print_hex(key.secret, sizeof(key.secret));
 		fprintf(stderr, "\n");
 	}
 
