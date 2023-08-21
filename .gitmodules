@@ -133,5 +133,12 @@
 [submodule "deps/gnostr-icons"]
 	path = deps/gnostr-icons
 	url = https://github.com/gnostr-org/gnostr-icons.git
+	branch = master
+	ignore = dirty
+	shallow = true
+[submodule "ext/wxWidgets-3.2.2.1"]
+	path = ext/wxWidgets-3.2.2.1
+	url = https://github.com/gnostr-org/wxWidgets.git
+	branch = master
 	ignore = dirty
 	shallow = true

@@ -122,6 +122,7 @@ set(src ${src} src/database.hh)
 set(src ${src} src/database.cc)
 
 add_library(nostr ${src})
+
 if (NOT BUILD_MOBILE)
 add_dependencies(nostr configurator)
 endif()

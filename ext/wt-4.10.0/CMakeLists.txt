@@ -254,8 +254,54 @@ find_package(Asciidoctor)
 set(HPDF_ROOT ${HARU_PREFIX})
 find_package(HPDF)
 
-set(OPENSSL_ROOT_DIR ${SSL_PREFIX})
+set(OPENSSL_ROOT_DIR "${CMAKE_SOURCE_DIR}/ext/openssl-3.0.5")
 find_package(OpenSSL)
+if(USE_OPENSSL)
+
+  if (MSVC)
+    if(DEFINED OPENSSL_ROOT_DIR)
+       message(STATUS "OPENSSL_ROOT_DIR: ${OPENSSL_ROOT_DIR}")
+    else()
+      set(OPENSSL_ROOT_DIR "${CMAKE_SOURCE_DIR}/ext/openssl-3.0.5")
+      message(STATUS "Setting OPENSSL_ROOT_DIR to: ${OPENSSL_ROOT_DIR}")
+    endif()
+  endif()
+
+ if (APPLE_IOS_TARGET)
+   set(OPENSSL_ROOT_DIR "/Users/pvn/dev/openssl-apple/bin/iPhoneOS16.4-arm64.sdk")
+   message(STATUS "iOS OpenSSL include: ${OPENSSL_INCLUDE_DIR}")
+   include_directories("/Users/pvn/dev/openssl-apple/bin/iPhoneOS16.4-arm64.sdk/include/openssl")
+   link_directories("/Users/pvn/dev/openssl-apple/bin/iPhoneOS16.4-arm64.sdk/lib/")
+ endif()
+
+ set(OPENSSL_ROOT_DIR "${CMAKE_SOURCE_DIR}/ext/openssl-3.0.5")
+ find_package(OpenSSL REQUIRED)
+ message(STATUS "OpenSSL include: ${OPENSSL_INCLUDE_DIR}")
+ message(STATUS "OpenSSL libraries: ${OPENSSL_LIBRARIES}")
+ include_directories(${OPENSSL_INCLUDE_DIR})
+ set(lib_dep ${lib_dep} ${OPENSSL_LIBRARIES})
+
+  if (MSVC)
+    set(OPENSSL_ROOT_DIR "${CMAKE_SOURCE_DIR}/ext/openssl-3.0.5")
+    message(STATUS "OpenSSL include: ${OPENSSL_INCLUDE_DIR}")
+  endif()
+
+  find_package(OpenSSL REQUIRED)
+  message(STATUS "OpenSSL include: ${OPENSSL_INCLUDE_DIR}")
+  message(STATUS "OpenSSL libraries: ${OPENSSL_LIBRARIES}")
+  include_directories(${OPENSSL_INCLUDE_DIR})
+  set(lib_dep ${lib_dep} ${OPENSSL_LIBRARIES})
+  if (MSVC)
+    set(lib_dep ${lib_dep} crypt32.lib)
+  endif()
+endif()
+
+
+
+
+
+
+
 
 IF (ENABLE_SAML)
   find_package(OpenSAML)

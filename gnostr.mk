@@ -338,13 +338,15 @@ gnostr:$(HEADERS) $(GNOSTR_OBJS) $(ARS)## 	make gnostr binary
 install-all:
 	mkdir -p $(PREFIX)/bin
 	mkdir -p $(PREFIX)/include
-	                    install -m755 -vC $(PWD)/gnostr                         $(PREFIX)/bin     2>/dev/null
-	shopt -s extglob && install -m755 -vC $(PWD)/gnostr                         ${PREFIX}/bin     2>/dev/null
-	shopt -s extglob && install -m755 -vC $(PWD)/include/*.*                    ${PREFIX}/include 2>/dev/null
-	shopt -s extglob && install -m755 -vC $(PWD)/gnostr-get-relays              $(PREFIX)/bin     2>/dev/null
-	shopt -s extglob && install -m755 -vC $(PWD)/gnostr-set-relays              $(PREFIX)/bin     2>/dev/null
-	shopt -s extglob && install -m755 -vC $(PWD)/template/gnostr**              $(PREFIX)/bin     2>/dev/null
-	shopt -s extglob && install -m755 -vC $(PWD)/template/gnostr-*-*            $(PREFIX)/bin     2>/dev/null
+	                    install -m755 -vC $(PWD)/gnostr                           $(PREFIX)/bin     2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/gnostr                           ${PREFIX}/bin     2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/include/*.*                      ${PREFIX}/include 2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/ext/asio-1.18.1/include/*.*      ${PREFIX}/include 2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/ext/asio-1.18.1/include/asio/*.* ${PREFIX}/include 2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/gnostr-get-relays                $(PREFIX)/bin     2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/gnostr-set-relays                $(PREFIX)/bin     2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/template/gnostr**                $(PREFIX)/bin     2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/template/gnostr-*-*              $(PREFIX)/bin     2>/dev/null
 	$(MAKE) install
 
 .ONESHELL:
