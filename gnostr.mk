@@ -339,9 +339,11 @@ install-all:
 	mkdir -p $(PREFIX)/bin
 	mkdir -p $(PREFIX)/include
 	                    install -m755 -vC $(PWD)/gnostr                         $(PREFIX)/bin     2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/gnostr                         ${PREFIX}/bin     2>/dev/null
 	shopt -s extglob && install -m755 -vC $(PWD)/include/*.*                    ${PREFIX}/include 2>/dev/null
-	shopt -s extglob && install -m755 -vC $(PWD)/gnostr-get-relays     $(PREFIX)/bin     2>/dev/null
-	shopt -s extglob && install -m755 -vC $(PWD)/gnostr-set-relays     $(PREFIX)/bin     2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/gnostr-get-relays              $(PREFIX)/bin     2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/gnostr-set-relays              $(PREFIX)/bin     2>/dev/null
+	shopt -s extglob && install -m755 -vC $(PWD)/template/gnostr**              $(PREFIX)/bin     2>/dev/null
 	shopt -s extglob && install -m755 -vC $(PWD)/template/gnostr-*-*            $(PREFIX)/bin     2>/dev/null
 	$(MAKE) install
 
