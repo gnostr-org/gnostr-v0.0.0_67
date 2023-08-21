@@ -230,7 +230,7 @@ checkbrew:## 	checkbrew
 ifeq ($(HOMEBREW),)
 	@/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-	@type -P brew && brew install wxWidgets openssl@3.0 gettext
+	@type -P brew && brew install wxWidgets openssl@3.0 gettext qwt-qt5
 endif
 
 tag:## 	git tag & git push
