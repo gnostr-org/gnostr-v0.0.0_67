@@ -221,10 +221,10 @@ endif()
 
 if (NOT BUILD_MOBILE)
 
-  add_executable(nostro src/wss_client.cc)
-  add_executable(vostro src/wss_relay.cc)
-  target_link_libraries (nostro ${lib_dep})
-  target_link_libraries (vostro ${lib_dep})
+  #add_executable(nostro src/wss_client.cc)
+  #add_executable(vostro src/wss_relay.cc)
+  #target_link_libraries (nostro ${lib_dep})
+  #target_link_libraries (vostro ${lib_dep})
 
   add_executable(gnostr-client src/gnostr-client.cc)
   add_executable(gnostr-req src/gnostr-req.cc)
@@ -238,8 +238,9 @@ if (NOT BUILD_MOBILE)
   target_link_libraries (gnostr-req ${lib_dep})
   target_link_libraries (gnostr-gnode ${lib_dep})
 
-  add_executable(gnostr-set-relays template/gnostr-set-relays.c)
-  add_executable(gnostr-get-relays template/gnostr-get-relays.c)
+  add_executable(gnostr-set-relays src/gnostr-set-relays.c)
+  add_executable(gnostr-get-relays src/gnostr-get-relays.c)
+
 endif()
 
 #//////////////////////////
@@ -272,13 +273,10 @@ endif()
 #//////////////////////////
 
 if (NOT BUILD_MOBILE)
-  add_executable(examples examples/examples.cc)
-  target_link_libraries (examples ${lib_dep})
-endif()
-
 if(UNIX AND NOT APPLE)
   add_executable(examples examples/examples.cc)
   target_link_libraries (examples ${lib_dep})
+endif()
 endif()
 
 #//////////////////////////
