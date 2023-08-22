@@ -60,7 +60,7 @@ cmake-boost: 	cmake-boost
 
 ##gnostr-docs:
 ##	docker-statt doc/gnostr.1
-gnostr-docs:install-doc docker-start doc/gnostr.1## 	gnostr-docs: convert README to doc/gnostr.1
+gnostr-docs:install-doc docker-start doc/gnostr-readme.1## 	gnostr-docs: convert README to doc/gnostr.1
 #@echo docs
 	@bash -c 'if pgrep MacDown; then pkill MacDown; fi; 2>/dev/null'
 	@bash -c 'cat $(PWD)/sources/HEADER.md                >  $(PWD)/README.md 2>/dev/null'
@@ -72,7 +72,7 @@ gnostr-docs:install-doc docker-start doc/gnostr.1## 	gnostr-docs: convert README
 	git add --ignore-errors sources/*.md 2>/dev/null || echo && git add --ignore-errors *.md 2>/dev/null || echo
 #@git ls-files -co --exclude-standard | grep '\.md/$\' | xargs git
 
-doc/gnostr.1: README##
+doc/gnostr-readme.1: README##
 	scdoc < $^ > $@
 
 .PHONY: version
@@ -364,7 +364,7 @@ install-all:
 .ONESHELL:
 ##install-doc
 ##	install-doc
-install-doc:doc-gnostr doc-about doc-act doc-cat doc-cli doc-client doc-get-relays doc-git-log doc-git-reflog doc-git doc-grep doc-hyp doc-legit doc-nonce doc-sha256 doc-gnode doc-post doc-proxy doc-query doc-relays doc-repo doc-req doc-send doc-set-relays doc-send doc-set-relays doc-sha256 doc-tests doc-web doc-weeble doc-wobble## 	install-doc
+install-doc:doc-gnostr doc-about doc-act doc-cat doc-cli doc-client doc-get-relays doc-git-log doc-git-reflog doc-git doc-grep doc-hyp doc-legit doc-nonce doc-sha256 doc-gnode doc-post doc-proxy doc-query doc-relays doc-repo doc-req doc-send doc-set-relays doc-send doc-set-relays doc-sha256 doc-tests doc-web doc-weeble doc-wobble doc-readme## 	install-doc
 ## 	install -m 0644 -vC doc/gnostr.1 $(PREFIX)/share/man/man1/gnostr.1
 doc-gnostr:
 	@install -m 0644 -vC doc/gnostr.1 $(PREFIX)/share/man/man1/gnostr.1 || \
@@ -420,6 +420,9 @@ doc-proxy:
 doc-query:
 	@install -m 0644 -vC doc/gnostr-query.1 $(PREFIX)/share/man/man1/gnostr-query.1 || \
 		echo "doc/gnostr-query.1 failed to install..."
+doc-readme:
+	@install -m 0644 -vC doc/gnostr-readme.1 $(PREFIX)/share/man/man1/gnostr-readme.1 || \
+		echo "doc/gnostr-readme.1 failed to install..."
 doc-relays:
 	@install -m 0644 -vC doc/gnostr-relays.1 $(PREFIX)/share/man/man1/gnostr-relays.1 || \
 		echo "doc/gnostr-relays.1 failed to install..."
