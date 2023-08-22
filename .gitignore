@@ -147,3 +147,4 @@ CMakeDoxygenDefaults.cmake
 web/gnostr-web
 web/wostro
 
+debug
