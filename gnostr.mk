@@ -39,28 +39,28 @@ export GTAR
 
 
 ##cmake-all:
-#cmake-all: submodules gnostr gnostr-cat gnostr-git gnostr-relay gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-docs
-cmake-all:
+#cmake-all: submodules gnostr gnostr-cat gnostr-git gnostr-relay gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-docs cmake-web
+cmake-all:## 	cmake-all: cmake . && make submodules gnostr gnostr-git ... cmake-web
 	$(shell which cmake) .
-	$(MAKE) submodules gnostr gnostr-git gnostr-relay gnostr-get-relays gnostr-set-relays gnostr-cli gnostr-proxy gnostr-legit gnostr-act gnostr-docs
+	$(MAKE) submodules gnostr gnostr-git gnostr-relay gnostr-get-relays gnostr-set-relays gnostr-cli gnostr-proxy gnostr-legit gnostr-act gnostr-docs cmake-web
 ## 	cmake-web:
 ## 	cmake-web: cmake-boost cmake-wt cmake-widgets
-cmake-web:cmake-boost cmake-wt cmake-widgets## cmake-web
+cmake-web:cmake-boost cmake-wt cmake-widgets## cmake-web cmake-boost cmake-wt cmake-widgets
 ## 	cmake-widgets:
-cmake-widgets:
+cmake-widgets:## 	cmake-widgets
 	. build.widgets.sh
 ## 	cmake-wt:
-cmake-wt:
+cmake-wt:## 	cmake-wt
 	. build.wt.sh
 ## 	cmake-boost:
-cmake-boost:
+cmake-boost: 	cmake-boost
 	. build.boost.sh
 ## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-act gnostr-xor gnostr-docs
 ##	build gnostr tool and related dependencies
 
 ##gnostr-docs:
 ##	docker-statt doc/gnostr.1
-gnostr-docs:docker-start doc/gnostr.1## 	gnostr-docs: convert README to doc/gnostr.1
+gnostr-docs:install-doc docker-start doc/gnostr.1## 	gnostr-docs: convert README to doc/gnostr.1
 #@echo docs
 	@bash -c 'if pgrep MacDown; then pkill MacDown; fi; 2>/dev/null'
 	@bash -c 'cat $(PWD)/sources/HEADER.md                >  $(PWD)/README.md 2>/dev/null'
