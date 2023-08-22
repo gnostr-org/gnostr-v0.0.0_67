@@ -33,6 +33,10 @@ int main(int argc, char** argv)
   try
   {
     comm::start_log();
+    if (argc < 1) {}
+    if (argc < 2) {}
+    if (argc < 3) {}
+    if (argc < 4) {}
     Wt::WServer server(argc, argv);
     server.addEntryPoint(Wt::EntryPointType::Application, create_application);
     server.run();

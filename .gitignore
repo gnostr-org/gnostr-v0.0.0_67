@@ -140,3 +140,10 @@ src/nostril/libnostri.dylib
 
 configurator.out.dSYM/
 desktop/gnostro.app/
+
+CMakeDoxyfile.in
+CMakeDoxygenDefaults.cmake
+
+web/gnostr-web
+web/wostro
+

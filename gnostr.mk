@@ -43,6 +43,18 @@ export GTAR
 cmake-all:
 	$(shell which cmake) .
 	$(MAKE) submodules gnostr gnostr-git gnostr-relay gnostr-get-relays gnostr-set-relays gnostr-cli gnostr-proxy gnostr-legit gnostr-act gnostr-docs
+## 	cmake-web:
+## 	cmake-web: cmake-boost cmake-wt cmake-widgets
+cmake-web:cmake-boost cmake-wt cmake-widgets## cmake-web
+## 	cmake-widgets:
+cmake-widgets:
+	. build.widgets.sh
+## 	cmake-wt:
+cmake-wt:
+	. build.wt.sh
+## 	cmake-boost:
+cmake-boost:
+	. build.boost.sh
 ## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-act gnostr-xor gnostr-docs
 ##	build gnostr tool and related dependencies
 
