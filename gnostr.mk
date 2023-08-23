@@ -235,7 +235,7 @@ deps/gnostr-cli/.git:
 #.PHONY:deps/gnostr-cli/gnostr-cli
 deps/gnostr-cli/gnostr-cli:deps/gnostr-cli/.git
 	cd deps/gnostr-cli && \
-		make cargo-install
+		make install
 deps/gnostr-cli/target/release/gnostr-cli:deps/gnostr-cli/gnostr-cli## 	gnostr-cli
 .PHONY:
 gnostr-cli:deps/gnostr-cli/target/release/gnostr-cli
