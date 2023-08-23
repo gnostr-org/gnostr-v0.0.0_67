@@ -73,6 +73,15 @@ jobs:
       - name: rust:sudo make gnostr-cat
         run: |
           sudo make gnostr-cat
+      - name: rust:sudo make gnostr-cli
+        run: |
+          sudo make gnostr-cli
+      - name: rust:sudo make gnostr-command
+        run: |
+          sudo make gnostr-command
+      - name: rust:sudo make gnostr-grep
+        run: |
+          sudo make gnostr-grep
       - name: rust:sudo make gnostr-legit
         run: |
           sudo make gnostr-legit
