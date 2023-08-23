@@ -1,6 +1,6 @@
 # This file sets:
-# - BOOST_INCLUDE_DIRS
-# - BOOST_LIB_DIRS
+# - BOOST_INCLUDE_DIR
+# - BOOST_LIB_DIR
 # - BOOST_WT_FOUND  // All dependencies for wt found
 # - BOOST_WT_MT_FOUND
 # - BOOST_WTHTTP_FOUND // All dependencies for wthttp found
@@ -114,8 +114,8 @@ IF (Boost_FOUND)
   ENDIF()
 
   # Translate variables from official cmake names to internally used names
-  SET(BOOST_INCLUDE_DIRS ${Boost_INCLUDE_DIRS})
-  SET(BOOST_LIB_DIRS ${Boost_LIBRARY_DIRS})
+  SET(BOOST_INCLUDE_DIR ${Boost_INCLUDE_DIR})
+  SET(BOOST_LIB_DIRS ${Boost_LIBRARY_DIR})
   SET(BOOST_FS_LIB ${Boost_FILESYSTEM_LIBRARY})
   SET(BOOST_PO_LIB ${Boost_PROGRAM_OPTIONS_LIBRARY})
   SET(BOOST_SYSTEM_LIB ${Boost_SYSTEM_LIBRARY})
