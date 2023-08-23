@@ -1,9 +1,11 @@
-##clean
+##gnostr-clean
 ##	remove gnostr *.o *.a gnostr.1
-cleann:## 	remove gnostr *.o *.a gnostr.1
+gnostr-clean:## 	remove gnostr *.o *.a gnostr.1
 	rm -rf $(shell which gnostr) || echo
 	rm -rf /usr/local/share/man/man1/gnostr.1 || echo
+	rm -rf /usr/local/share/man/man1/gnostr-*.1 || echo
 	rm -f gnostr *.o *.a || echo
+	rm -f gnostr-* || echo
 
 ##clean-hyper-nostr
 ##	remove deps/hyper-nostr
