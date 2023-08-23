@@ -211,8 +211,9 @@ extra:## 	additional
 ##extra
 	@echo "example: add additional make commands"
 
-cmake:submodules## 	cmake .
+cmake:## 	cmake .
 ##cmake
+	$(MAKE) submodules || ls deps && ls ext && ls nips && echo ""
 	cmake -S . -B build && cd build && make all
 .PHONY:ext/openssl
 ext/openssl:
