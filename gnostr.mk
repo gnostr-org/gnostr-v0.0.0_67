@@ -240,6 +240,16 @@ deps/gnostr-cli/target/release/gnostr-cli:deps/gnostr-cli/gnostr-cli## 	gnostr-c
 .PHONY:
 gnostr-cli:deps/gnostr-cli/target/release/gnostr-cli
 
+deps/gnostr-command/.git:
+	@devtools/refresh-submodules.sh deps/gnostr-command
+#.PHONY:deps/gnostr-command/gnostr-command
+deps/gnostr-command/gnostr-command:deps/gnostr-command/.git
+	cd deps/gnostr-command && \
+		make install
+deps/gnostr-command/target/release/gnostr-command:deps/gnostr-command/gnostr-command## 	gnostr-command
+.PHONY:
+gnostr-command:deps/gnostr-command/target/release/gnostr-command
+
 deps/gnostr-proxy/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-proxy
 .PHONY:deps/gnostr-proxy
