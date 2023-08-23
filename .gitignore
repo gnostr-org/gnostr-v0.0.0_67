@@ -1,10 +1,8 @@
+**.dylib
+
 build
-/ext/
-/src/nostril/config.h
+src/nostril/config.h
 
-**.DS_Store
-
-requirements.txt
 **.DS_Store
 **.a
 
@@ -50,7 +48,6 @@ database.json
 event.json
 http_client.log.txt
 http_relay.log.txt
-include/
 list_01.txt
 list_02.txt
 nostro_event.json
@@ -67,6 +64,7 @@ web/wt_config.xml
 **.a
 **.txt
 **CMakeFiles**
+**CMakeCache**
 
 metadata_content.**.json
 
