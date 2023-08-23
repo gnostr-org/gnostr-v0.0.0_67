@@ -211,6 +211,18 @@ extra:## 	additional
 ##extra
 	@echo "example: add additional make commands"
 
+
+.PHONY:ext/boost_1_82_0/b2
+ext/boost_1_82_0/b2:
+	cd ext/boost_1_82_0 && ./bootstrap.sh
+.PHONY:ext/boost_1_82_0/stage/lib
+ext/boost_1_82_0/stage/lib:ext/boost_1_82_0/b2
+	cd ext/boost_1_82_0 && ./b2 headers && ./b2
+.PHONY:ext/boost_1_82_0/.git
+ext/boost_1_82_0/.git:
+	@devtools/refresh-submodules.sh ext/boost_1_82_0
+boost:ext/boost_1_82_0/.git## 	boost
+
 cmake:## 	cmake .
 ##cmake
 	$(MAKE) submodules || ls deps && ls ext && ls nips && echo ""
