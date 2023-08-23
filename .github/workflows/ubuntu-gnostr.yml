@@ -86,7 +86,7 @@ jobs:
         run: |
           sudo make gnostr-legit
 
-      - run: sudo make gnostr-proxy
+      - run: sudo mkdir -p /root/.nvm &&  make gnostr-proxy
 
       - run: make cmake
 
