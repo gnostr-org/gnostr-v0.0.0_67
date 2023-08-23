@@ -68,7 +68,7 @@ jobs:
 
       - run: sudo make libsecp256k1.a
       - run: sudo make gnostr
-      - run: sudo make gnostr-proxy
+      - run: sudo make gnostr-git
 
       - name: rust:sudo make gnostr-cat
         run: |
@@ -85,6 +85,8 @@ jobs:
       - name: rust:sudo make gnostr-legit
         run: |
           sudo make gnostr-legit
+
+      - run: sudo make gnostr-proxy
 
       - run: make cmake
 
