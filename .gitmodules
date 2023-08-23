@@ -4,12 +4,6 @@
 	branch = boost-1.82.0
 	ignore = dirty
 	shallow = true
-[submodule "deps/secp256k1"]
-	path = deps/secp256k1
-	url = https://github.com/bitcoin-core/secp256k1
-	branch = master
-	ignore = dirty
-	shallow = true
 [submodule "deps/gnostr-act"]
 	path = deps/gnostr-act
 	url = https://github.com/gnostr-org/gnostr-act.git
