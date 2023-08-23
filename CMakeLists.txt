@@ -382,7 +382,7 @@ endif()
 
 install(TARGETS gnostr-gnode
         CONFIGURATIONS Debug
-        RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin)
+        RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
 install(TARGETS gnostr-gnode
         CONFIGURATIONS Release
         RUNTIME DESTINATION /usr/local/bin)
