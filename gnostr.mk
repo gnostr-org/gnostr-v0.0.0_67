@@ -3,7 +3,6 @@ CFLAGS                                 += -I/include
 LDFLAGS                                 = -Wl -V
 GNOSTR_OBJS                             = gnostr.o       sha256.o aes.o base64.o libsecp256k1.a
 #GNOSTR_GIT_OBJS                         = gnostr-git.o   sha256.o aes.o base64.o libgit.a
-#GNOSTR_RELAY_OBJS                       = gnostr-relay.o sha256.o aes.o base64.o
 ## GNOSTR_XOR_OBJS                         = gnostr-xor.o   sha256.o aes.o base64.o libsecp256k1.a
 HEADER_INCLUDE                          = include
 HEADERS                                 = $(HEADER_INCLUDE)/hex.h \
@@ -22,8 +21,8 @@ endif
 ARS                                    := libsecp256k1.a
 LIB_ARS                                := libsecp256k1.a libgit.a
 
-SUBMODULES                              = deps/secp256k1
-SUBMODULES_MORE                         = deps/secp256k1 deps/git deps/gnostr-cat deps/openssl deps/gnostr-py deps/gnostr-aio deps/act deps/gnostr-legit deps/gnostr-relay deps/gnostr-proxy
+SUBMODULES                              = 
+SUBMODULES_MORE                         = deps/gnostr-git deps/gnostr-cat deps/openssl deps/gnostr-py deps/gnostr-aio deps/act deps/gnostr-legit deps/gnostr-proxy
 
 VERSION                                :=$(shell cat version)
 export VERSION
@@ -39,10 +38,10 @@ export GTAR
 
 
 ##cmake-all:
-#cmake-all: submodules gnostr gnostr-cat gnostr-git gnostr-relay gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-docs cmake-web
+#cmake-all: submodules gnostr gnostr-cat gnostr-git gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-docs cmake-web
 cmake-all:## 	cmake-all: cmake . && make submodules gnostr gnostr-git ... cmake-web
 	$(shell which cmake) .
-	$(MAKE) submodules gnostr gnostr-git gnostr-relay gnostr-get-relays gnostr-set-relays gnostr-cli gnostr-proxy gnostr-legit gnostr-act gnostr-docs
+	$(MAKE) submodules gnostr gnostr-git gnostr-get-relays gnostr-set-relays gnostr-cli gnostr-proxy gnostr-legit gnostr-act gnostr-docs
 	$(MAKE) cmake-web
 	$(MAKE) gnostr-web
 ## 	cmake-web:
@@ -57,7 +56,7 @@ cmake-wt:## 	cmake-wt
 ## 	cmake-boost:
 cmake-boost: 	cmake-boost
 	. build.boost.sh
-## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-act gnostr-xor gnostr-docs
+## 	make gnostr gnostr-cat gnostr-git gnostr-act gnostr-xor gnostr-docs
 ##	build gnostr tool and related dependencies
 
 ##gnostr-docs:
@@ -140,16 +139,15 @@ diff-log:
 	@gnostr-git -h > tests/gnostr-git-h.log
 	@gnostr-git-log -h > tests/gnostr-git-log-h.log
 	@gnostr-git-reflog -h > tests/gnostr-git-reflog-h.log
-	@gnostr-relay -h > tests/gnostr-relay-h.log
 .PHONY:submodules
-submodules:deps/secp256k1/.git deps/gnostr-git/.git deps/gnostr-cat/.git deps/gnostr-aio/.git deps/gnostr-py/.git deps/gnostr-legit/.git deps/gnostr-proxy/.git deps/gnostr-act/.git## 	refresh-submodules
+submodules:deps/gnostr-git/.git deps/gnostr-cat/.git deps/gnostr-aio/.git deps/gnostr-py/.git deps/gnostr-legit/.git deps/gnostr-proxy/.git deps/gnostr-act/.git## 	refresh-submodules
 	git submodule update --init --recursive
 
 .PHONY:deps/secp256k1/config.log
 .ONESHELL:
-deps/secp256k1/.git:
-	devtools/refresh-submodules.sh deps/secp256k1
-deps/secp256k1/include/secp256k1.h: deps/secp256k1/.git
+##deps/secp256k1/.git:
+##	devtools/refresh-submodules.sh deps/secp256k1
+deps/secp256k1/include/secp256k1.h:
 deps/secp256k1/configure: deps/secp256k1/include/secp256k1.h
 	cd deps/secp256k1 && \
 		./autogen.sh && \
@@ -196,17 +194,9 @@ deps/gnostr-act/gnostr-act:deps/gnostr-act/.git
 	cd deps/gnostr-act && make install
 gnostr-act:deps/gnostr-act/gnostr-act## 	gnostr-act
 
-##.PHONY:gnostr-get-relays gnostr-set-relays
-##gnostr-get-relays:
-##	$(CC) ./template/gnostr-get-relays.c -o gnostr-get-relays
-##gnostr-set-relays:
-##	$(CC) ./template/gnostr-set-relays.c -o gnostr-set-relays
-
-gnostr-relay:build## 	gnostr-relay:build
-.PHONY:build
-gnostr-build:## 		cmake build gnostr-relay
+.PHONY:gnostr-build
+gnostr-build:## 		cmake gnostr-build
 	cmake -S . -B build && cd build && cmake ../ && make
-
 
 deps/gnostr-legit/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-legit
@@ -255,10 +245,10 @@ deps/gnostr-proxy/.git:
 .PHONY:deps/gnostr-proxy
 deps/gnostr-proxy:deps/gnostr-proxy/.git
 	cd deps/gnostr-proxy && \
-		make install
+		make nvm pnpm install
+
 gnostr-proxy:deps/gnostr-proxy
 	cat deps/gnostr-proxy/public/assets/entrypoints.json
-
 
 deps/gnostr-lfs/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-lfs
@@ -270,39 +260,13 @@ deps/gnostr-lfs:deps/gnostr-lfs/.git
 gnostr-lfs:deps/gnostr-lfs
 	#cat deps/gnostr-proxy/public/assets/entrypoints.json
 
-
-#deps/gnostr-relay/.git:
-#	@devtools/refresh-submodules.sh deps/gnostr-relay
-##.PHONY:deps/gnostr-relay/gnostr-relay
-#deps/gnostr-relay:deps/gnostr-relay/.git
-#	cd deps/gnostr-relay && \
-#		make
-##gnostr-relay:deps/gnostr-relay/target/release/gnostr-relay## 	gnostr-relay
-#.PHONY:deps/gnostr-relay
-##PHONY for now...
-#gnostr-relay:deps/gnostr-relay## 	gnostr-relay
-#	cp $< $@
-
-deps/tcl/.git:
-	@devtools/refresh-submodules.sh deps/tcl
-deps/tcl/unix/libtclstub.a:deps/tcl/.git
-	cd deps/tcl/unix && \
-		./autogen.sh configure && ./configure && make install
-libtclstub.a:deps/tcl/unix/libtclstub.a## 	deps/tcl/unix/libtclstub.a
-	cp $< $@
-##tcl-unix
-##	deps/tcl/unix/libtclstub.a deps/tcl/.git
-##	cd deps/tcl/unix; \
-##	./autogen.sh configure && ./configure && make install
-tcl-unix:libtclstub.a## 	deps/tcl/unix/libtclstub.a
-
-
 deps/gnostr-cat/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-cat
 #.PHONY:deps/gnostr-cat
 deps/gnostr-cat:deps/gnostr-cat/.git
 	cd deps/gnostr-cat && \
 		make cargo-install
+
 .PHONY:deps/gnostr-cat/target/release/gnostr-cat
 deps/gnostr-cat/target/release/gnostr-cat:deps/gnostr-cat
 	cd deps/gnostr-cat && \
@@ -333,18 +297,6 @@ gnostr:$(HEADERS) $(GNOSTR_OBJS) $(ARS)## 	make gnostr binary
 #	git submodule update --init --recursive
 	$(CC) $(CFLAGS) $(GNOSTR_OBJS) $(ARS) -o $@
 
-#gnostr-relay:initialize $(HEADERS) $(GNOSTR_RELAY_OBJS) $(ARS)## 	make gnostr-relay
-###gnostr-relay
-#	git submodule update --init --recursive
-#	$(CC) $(CFLAGS) $(GNOSTR_RELAY_OBJS) $(ARS) -o $@
-
-## #.PHONY:gnostr-xor
-## gnostr-xor: $(HEADERS) $(GNOSTR_XOR_OBJS) $(ARS)## 	make gnostr-xor
-## ##gnostr-xor
-## 	echo $@
-## 	touch $@
-## 	rm -f $@
-## 	$(CC) $@.c -o $@
 
 .ONESHELL:
 ##install all
