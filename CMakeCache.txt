@@ -37,7 +37,7 @@ BUILD_EXAMPLES:BOOL=OFF
 BUILD_MOBILE:BOOL=OFF
 
 //Build shared libraries.
-BUILD_SHARED_LIBS:BOOL=OFF
+BUILD_SHARED_LIBS:BOOL=ON
 
 //Build the testing tree.
 BUILD_TESTING:BOOL=ON
@@ -63,14 +63,14 @@ Boost_SYSTEM_LIBRARY_RELEASE:STRING=/usr/local/lib/libboost_system-mt.dylib
 Boost_THREAD_LIBRARY_RELEASE:STRING=/usr/local/lib/libboost_thread-mt.dylib
 
 //Path to a program.
-CMAKE_ADDR2LINE:FILEPATH=CMAKE_ADDR2LINE-NOTFOUND
+CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 
 //Path to a program.
 CMAKE_AR:FILEPATH=/Applications/Xcode@12.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
-CMAKE_BUILD_TYPE:STRING=
+CMAKE_BUILD_TYPE:STRING=Release
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -228,7 +228,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 CMAKE_NM:FILEPATH=/Applications/Xcode@12.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm
 
 //Path to a program.
-CMAKE_OBJCOPY:FILEPATH=CMAKE_OBJCOPY-NOTFOUND
+CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 
 //OBJCXX compiler
 CMAKE_OBJCXX_COMPILER:FILEPATH=/Applications/Xcode@12.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
@@ -291,7 +291,7 @@ CMAKE_PROJECT_VERSION_TWEAK:STATIC=
 CMAKE_RANLIB:FILEPATH=/Applications/Xcode@12.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib
 
 //Path to a program.
-CMAKE_READELF:FILEPATH=CMAKE_READELF-NOTFOUND
+CMAKE_READELF:FILEPATH=/usr/bin/readelf
 
 //Flags used by the linker during the creation of shared libraries
 // during all build types.
@@ -1720,6 +1720,8 @@ ASCIIDOCTOR_EXECUTABLE-ADVANCED:INTERNAL=1
 ATOMICS_LOCK_FREE_INSTRUCTIONS:INTERNAL=1
 //MODIFIED property for variable: BUILD_EXAMPLES
 BUILD_EXAMPLES-MODIFIED:INTERNAL=ON
+//MODIFIED property for variable: BUILD_SHARED_LIBS
+BUILD_SHARED_LIBS-MODIFIED:INTERNAL=ON
 //ADVANCED property for variable: BUILD_TESTING
 BUILD_TESTING-ADVANCED:INTERNAL=1
 //MODIFIED property for variable: BUILD_WEB
@@ -1730,6 +1732,8 @@ Boost_DIR-ADVANCED:INTERNAL=1
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
+//MODIFIED property for variable: CMAKE_BUILD_TYPE
+CMAKE_BUILD_TYPE-MODIFIED:INTERNAL=ON
 //STRINGS property for variable: CMAKE_BUILD_TYPE
 CMAKE_BUILD_TYPE-STRINGS:INTERNAL=RelWithDebInfo;Release;Debug;MinSizeRel;Coverage
 //This is the directory where this CMakeCache.txt was created
@@ -1843,6 +1847,8 @@ CMAKE_INSTALL_RUNSTATEDIR-ADVANCED:INTERNAL=1
 CMAKE_INSTALL_SBINDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_INSTALL_SHAREDSTATEDIR
 CMAKE_INSTALL_SHAREDSTATEDIR-ADVANCED:INTERNAL=1
+//Install .so files without execute permission.
+CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //ADVANCED property for variable: CMAKE_INSTALL_SYSCONFDIR
 CMAKE_INSTALL_SYSCONFDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
