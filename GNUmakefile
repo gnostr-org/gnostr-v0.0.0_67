@@ -211,7 +211,7 @@ extra:## 	additional
 ##extra
 	@echo "example: add additional make commands"
 
-
+.ONESHELL:
 .PHONY:ext/boost_1_82_0/b2
 ext/boost_1_82_0/b2:
 	cd ext/boost_1_82_0 && ./bootstrap.sh
@@ -222,6 +222,19 @@ ext/boost_1_82_0/stage/lib:ext/boost_1_82_0/b2
 ext/boost_1_82_0/.git:
 	@devtools/refresh-submodules.sh ext/boost_1_82_0
 boost:ext/boost_1_82_0/.git## 	boost
+
+.ONESHELL:
+.PHONY:ext/openssl-3.0.5
+ext/openssl-3.0.5:
+	cd ext/openssl-3.0.5
+.PHONY:ext/openssl-3.0.5/Makefile
+ext/openssl-3.0.5/Makefile:ext/openssl-3.0.5
+	cd ext/openssl-3.0.5 && ./Configure && make
+.PHONY:ext/openssl-3.0.5/.git
+ext/openssl-3.0.5/.git:
+	#@devtools/refresh-submodules.sh ext/openssl-3.0.5
+.PHONY:openssl
+openssl:ext/openssl-3.0.5/.git## 	openssl
 
 cmake:## 	cmake .
 ##cmake
