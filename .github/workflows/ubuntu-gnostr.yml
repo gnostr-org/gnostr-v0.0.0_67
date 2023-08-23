@@ -67,7 +67,7 @@ jobs:
           touch ~/GITHUB_TOKEN.txt
 
       - run: sudo make libsecp256k1.a
-      - run: sudo make gnostr
+      - run: sudo make gnostr && ./gnostr
       - run: sudo make gnostr-git
 
       - name: rust:sudo make gnostr-cat
