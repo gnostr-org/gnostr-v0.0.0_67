@@ -52,14 +52,14 @@ jobs:
           set-safe-directory: 'true'
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
-          cache: pnpm
+          node-version: 16
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
       - name: apt-get install
         run: |
           sudo apt-get update
+          sudo npm install -g --force @pnpm/exe
       - name: sudo make gnostr-cat
         run: |
           touch ~/GITHUB_TOKEN.txt
@@ -70,7 +70,7 @@ jobs:
           sudo apt-get install -y autoconf automake bash build-essential gettext libcurl4-openssl-dev libtool make python3 python3-pip util-linux zlib1g-dev cmake g++
           touch ~/GITHUB_TOKEN.txt
 
-      - run: cmake .
+      - run: make cmake
       - run: sudo make libsecp256k1.a
       - run: sudo make gnostr
       - run: sudo make gnostr-proxy
