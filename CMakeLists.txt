@@ -417,45 +417,45 @@ endif()
 #file(COPY "${CMAKE_SOURCE_DIR}/gnostr" DESTINATION /usr/local/bin)
 
 install(TARGETS gnostr-gnode
-        CONFIGURATIONS Debug
+        CONFIGURATIONS Debug RelWithDebInfo
         RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
 install(TARGETS gnostr-gnode
-        CONFIGURATIONS Release
+        CONFIGURATIONS Release RelWithDebInfo
         RUNTIME DESTINATION /usr/local/bin)
 
 install(TARGETS gnostr-client
-        CONFIGURATIONS Debug
+        CONFIGURATIONS Debug RelWithDebInfo
         RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
 install(TARGETS gnostr-client
-        CONFIGURATIONS Release
+        CONFIGURATIONS Release RelWithDebInfo
         RUNTIME DESTINATION /usr/local/bin)
 
 install(TARGETS gnostr-req
-        CONFIGURATIONS Debug
+        CONFIGURATIONS Debug RelWithDebInfo
         RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
 install(TARGETS gnostr-req
-        CONFIGURATIONS Release
+        CONFIGURATIONS Release RelWithDebInfo
         RUNTIME DESTINATION /usr/local/bin)
 
 install(TARGETS gnostr-set-relays
-        CONFIGURATIONS Debug
+        CONFIGURATIONS Debug RelWithDebInfo
         RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
 install(TARGETS gnostr-set-relays
-        CONFIGURATIONS Release
+        CONFIGURATIONS Release RelWithDebInfo
         RUNTIME DESTINATION /usr/local/bin)
 
 install(TARGETS gnostr-get-relays
-        CONFIGURATIONS Debug
+        CONFIGURATIONS Debug RelWithDebInfo
         RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
 install(TARGETS gnostr-get-relays
-        CONFIGURATIONS Release
+        CONFIGURATIONS Release RelWithDebInfo
         RUNTIME DESTINATION /usr/local/bin)
 
 install(TARGETS gnostr-tests
-        CONFIGURATIONS Debug
+        CONFIGURATIONS Debug RelWithDebInfo
         RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/debug)
 install(TARGETS gnostr-tests
-        CONFIGURATIONS Release
+        CONFIGURATIONS Release RelWithDebInfo
         RUNTIME DESTINATION /usr/local/bin)
 
 
