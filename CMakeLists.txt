@@ -7,7 +7,9 @@ if (MSVC)
 else()
  cmake_minimum_required(VERSION 3.15)
 endif()
-set(CMAKE_BUILD_TYPE Debug)
+
+#set(CMAKE_BUILD_TYPE Debug)
+
 project (nostr_client_relay LANGUAGES CXX C)
 
 if(MSVC)
@@ -18,6 +20,7 @@ option(BUILD_WEB "BUILD_WEB" OFF)
 option(BUILD_MOBILE "BUILD_MOBILE" OFF)
 option(USE_OPENSSL "set OFF to build without OpenSSL" ON)
 option(DEV_MODE "DEV_MODE" OFF)
+option(CMAKE_BUILD_TYPE "CMAKE_BUILD_TYPE" Release)
 
 if(MSVC)
 if(STATIC_MSVC)
@@ -38,17 +41,17 @@ message(STATUS "Build directory is " ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/ext/asio-1.18.1/include)
 include_directories(${CMAKE_SOURCE_DIR}/ext/json-3.11.2/single_include)
 include_directories(${CMAKE_SOURCE_DIR}/ext/secp256k1-0.3.2/include)
-include_directories(${CMAKE_SOURCE_DIR}/ext/wt-4.10.0/Wt)
-include_directories(/usr/local/include/wxWidgets/wx)
+#include_directories(${CMAKE_SOURCE_DIR}/ext/wt-4.10.0/Wt)
+#include_directories(/usr/local/include/wxWidgets/wx)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/ext/secp256k1-0.3.2)
 
 #-- WT_INCLUDE:
 #-- WT_CONFIG_H:
-add_subdirectory(${CMAKE_SOURCE_DIR}/ext/wt-4.10.0)
-add_subdirectory(${CMAKE_SOURCE_DIR}/ext/wxWidgets-3.2.2.1)
-set(WT_INCLUDE ${CMAKE_SOURCE_DIR}/ext/wt-4.10.0)
-set(WT_CONFIG_H ${CMAKE_SOURCE_DIR}/ext/wt-4.10.0/wt_config.xml)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/ext/wt-4.10.0)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/ext/wxWidgets-3.2.2.1)
+#set(WT_INCLUDE ${CMAKE_SOURCE_DIR}/ext/wt-4.10.0)
+#set(WT_CONFIG_H ${CMAKE_SOURCE_DIR}/ext/wt-4.10.0/wt_config.xml)
 
 if(BUILD_WEB)
 if(MSVC)
