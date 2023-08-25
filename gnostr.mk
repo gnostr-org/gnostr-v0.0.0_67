@@ -37,13 +37,15 @@ endif
 export GTAR
 
 
-##cmake-all:
-#cmake-all: submodules gnostr gnostr-cat gnostr-git gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-docs cmake-web
-cmake-all:## 	cmake-all: cmake . && make submodules gnostr gnostr-git ... cmake-web
+##gnostr-all:
+#gnostr-all: submodules gnostr gnostr-cat gnostr-git gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-docs cmake-web
+gnostr-all:## 	cmake-all: cmake . && make submodules gnostr gnostr-git ... cmake-web
 	$(shell which cmake) .
-	$(MAKE) submodules gnostr gnostr-git gnostr-get-relays gnostr-set-relays gnostr-cli gnostr-proxy gnostr-legit gnostr-act gnostr-docs
+## we compile gnostr-git prior to the other tools - they refer to gnostr-git
+	$(MAKE) submodules gnostr gnostr-git gnostr-cat gnostr-cli gnostr-command gnostr-grep gnostr-legit gnostr-proxy gnostr-sha256 gnostr-get-relays gnostr-set-relays gnostr-docs
 	$(MAKE) cmake-web
 	$(MAKE) gnostr-web
+	$(MAKE) gnostr-lfs ## last
 ## 	cmake-web:
 ## 	cmake-web: cmake-boost cmake-wt cmake-widgets
 cmake-web:cmake-boost cmake-wt cmake-widgets## cmake-web cmake-boost cmake-wt cmake-widgets
