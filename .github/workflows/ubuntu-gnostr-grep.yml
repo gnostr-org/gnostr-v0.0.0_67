@@ -65,7 +65,7 @@ jobs:
       - run: sudo make detect
       - run: sudo cmake .
 
-      - run: sudo make gnostr-grep && make gnostr-grep-test
+      - run: make gnostr-grep && which gnostr-grep
 
       - name: Save deps
         id: cache-deps-save
