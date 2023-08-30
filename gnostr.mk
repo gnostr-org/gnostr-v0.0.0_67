@@ -234,6 +234,7 @@ gnostr-proxy:deps/gnostr-proxy
 #	cp $< $@
 
 
+.PHONY:deps/gnostr-cat/.git
 deps/gnostr-cat/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-cat
 .PHONY:deps/gnostr-cat
