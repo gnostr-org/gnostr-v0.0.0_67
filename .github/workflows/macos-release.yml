@@ -13,7 +13,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  pre-release:
+     release:
     strategy:
       matrix:
         os: [macos-11, macos-12, macos-latest]
@@ -29,11 +29,9 @@ jobs:
           printenv
       - name: "Build release"
         run: |
-          make gnostr-all all
+          make gnostr
           mv gnostr gnostr-$RUNNER_OS-$RUNNER_ARCH
           shasum -a 256 gnostr-$RUNNER_OS-$RUNNER_ARCH > gnostr-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
-          mv gnostr-query gnostr-query-$RUNNER_OS-$RUNNER_ARCH
-          shasum -a 256 gnostr-query-$RUNNER_OS-$RUNNER_ARCH > gnostr-query-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
           ls -a
       - name: Save state
         run: echo "{name}={value}" >> $GITHUB_STATE
@@ -47,4 +45,3 @@ jobs:
           title: "Release Build"
           files: |
             gnostr
-            gnostr-*

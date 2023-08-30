@@ -31,8 +31,6 @@ jobs:
           make gnostr-all all
           mv gnostr gnostr-$RUNNER_OS-$RUNNER_ARCH
           shasum -a 256 gnostr-$RUNNER_OS-$RUNNER_ARCH > gnostr-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
-          mv gnostr-query gnostr-query-$RUNNER_OS-$RUNNER_ARCH
-          shasum -a 256 gnostr-query-$RUNNER_OS-$RUNNER_ARCH > gnostr-query-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
           ls -a
       - name: Save state
         run: echo "{name}={value}" >> $GITHUB_STATE
@@ -46,5 +44,4 @@ jobs:
           title: "Development Build"
           files: |
             gnostr
-            gnostr-*
 
