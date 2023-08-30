@@ -40,7 +40,7 @@ export GTAR
 
 ##all:
 #all: submodules gnostr gnostr-git gnostr-get-relays gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-xor docs
-all: submodules gnostr gnostr-git gnostr-get-relays gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-xor docs
+all: submodules gnostr gnostr-cat gnostr-git gnostr-get-relays gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-xor docs
 ##	build gnostr tool and related dependencies
 
 ##gnostr-docs:
@@ -236,7 +236,7 @@ gnostr-proxy:deps/gnostr-proxy
 
 deps/gnostr-cat/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-cat
-#.PHONY:deps/gnostr-cat
+.PHONY:deps/gnostr-cat
 deps/gnostr-cat:deps/gnostr-cat/.git
 	cd deps/gnostr-cat && \
 		make cargo-install
