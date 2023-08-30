@@ -1,18 +1,18 @@
-name: ubuntu-release
+name: ubuntu-pre-release
 
 # Controls when the action will run.
 on:
   push:
-    tags:
-      - "v*"
-      - "v*.*.*-rc**"
-      - "!v*.*.*-pre-release"
+    branches:
+      - 'master'
+      - 'main'
+      - 'v*.*.*-pre-release**'
 
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  release:
+  pre-release:
     strategy:
       matrix:
         os: [ubuntu-latest] #,ubuntu-20.04, ubuntu-22.04]
@@ -23,22 +23,25 @@ jobs:
         with:
           access_token: ${{ github.token }}
       - uses: actions/checkout@v3
-      - name: "printenv"
+      - name: make detect
         run: |
+          make detect
           printenv
-      - name: "sudo apt-get install libcurl4-openssl-dev gettext"
-        run: |
-          sudo apt-get install libcurl4-openssl-dev gettext
       - name: "Build pre-release"
         run: |
-          sudo touch /root/GITHUB_TOKEN.txt
-          sudo make dist
+          make gnostr
+          mv gnostr gnostr-$RUNNER_OS-$RUNNER_ARCH
+          shasum -a 256 gnostr-$RUNNER_OS-$RUNNER_ARCH > gnostr-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
+          ls -a
       - name: Save state
         run: echo "{name}={value}" >> $GITHUB_STATE
       - name: Set output
         run: echo "{name}={value}" >> $GITHUB_OUTPUT
-      - uses: actions/upload-artifact@v3
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          name: gnostr-${{ matrix.os }}
-          path: |
-            dist
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: ${{ matrix.os }}
+          prerelease: true
+          title: "Development Build"
+          files: |
+            gnostr
