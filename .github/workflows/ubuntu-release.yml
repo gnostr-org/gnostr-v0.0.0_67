@@ -6,6 +6,7 @@ on:
     tags:
       - "v*"
       - "v*.*.*-rc**"
+      - "!v*.*.*-pre-release"
 
   workflow_dispatch:
 
