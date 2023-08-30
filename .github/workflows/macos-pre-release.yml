@@ -27,7 +27,7 @@ jobs:
           printenv
       - name: "Build pre-release"
         run: |
-          cmake . && make secp256k1 all
+          cmake . && make secp256k1 gnostr-all all
           mv gnostr gnostr-$RUNNER_OS-$RUNNER_ARCH
           shasum -a 256 gnostr-$RUNNER_OS-$RUNNER_ARCH > gnostr-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
           ls -a
