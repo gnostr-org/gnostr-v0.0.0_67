@@ -65,8 +65,7 @@ jobs:
       - run: sudo make detect
       - run: sudo cmake .
 
-      - run: sudo make gnostr-grep
-      - run: ./deps/gnostr-grep/target/release/gnostr-grep 0 version
+      - run: sudo make gnostr-grep && make gnostr-grep-test
 
       - name: Save deps
         id: cache-deps-save

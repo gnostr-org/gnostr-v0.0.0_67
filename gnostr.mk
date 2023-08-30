@@ -268,22 +268,15 @@ gnostr-cli:deps/gnostr-cli/target/release/gnostr-cli## 	gnostr-cli
 
 deps/gnostr-grep/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-grep
-.PHONY:deps/gnostr-grep
 deps/gnostr-grep:deps/gnostr-grep/.git
 .PHONY:deps/gnostr-grep/target/release/gnostr-grep
 deps/gnostr-grep/target/release/gnostr-grep:deps/gnostr-grep
-	cd deps/gnostr-grep && \
-		make install
-	@cp $@ gnostr-grep || echo "" 2>/dev/null
+	cd deps/gnostr-grep && make cargo-build-release && make install
 .PHONY:gnostr-grep
-##gnostr-grep
-##deps/gnostr-grep deps/gnostr-grep/.git
-##	cd deps/gnostr-grep; \
-##	make cargo-install
 gnostr-grep:deps/gnostr-grep/target/release/gnostr-grep## 	gnostr-grep
+	@cp $@ gnostr-grep || echo "" 2>/dev/null
 gnostr-grep-test:gnostr-grep
 	./deps/gnostr-grep/target/release/gnostr-grep 0 version
-
 
 
 
