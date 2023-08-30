@@ -3,15 +3,17 @@ name: macos-release
 # Controls when the action will run.
 on:
   push:
-    tags:
-      - "v*"
-      - "v*.*.*-rc**"
+    branches:
+      - 'master'
+      - 'main'
+      - 'v*.*.*-release**'
+      - 'v*.*.*-rc**'
 
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  release:
+  pre-release:
     strategy:
       matrix:
         os: [macos-11, macos-12, macos-latest]
@@ -21,17 +23,17 @@ jobs:
         with:
           access_token: ${{ github.token }}
       - uses: actions/checkout@v3
-      - name: "printenv"
+      - name: make detect
         run: |
-          brew install libtool autoconf automake
+          make detect
           printenv
       - name: "Build release"
         run: |
-          make all
-          mv nostril nostril-$RUNNER_OS-$RUNNER_ARCH
-          shasum -a 256 nostril-$RUNNER_OS-$RUNNER_ARCH > nostril-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
-          mv nostril-query nostril-query-$RUNNER_OS-$RUNNER_ARCH
-          shasum -a 256 nostril-query-$RUNNER_OS-$RUNNER_ARCH > nostril-query-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
+          make gnostr-all all
+          mv gnostr gnostr-$RUNNER_OS-$RUNNER_ARCH
+          shasum -a 256 gnostr-$RUNNER_OS-$RUNNER_ARCH > gnostr-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
+          mv gnostr-query gnostr-query-$RUNNER_OS-$RUNNER_ARCH
+          shasum -a 256 gnostr-query-$RUNNER_OS-$RUNNER_ARCH > gnostr-query-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
           ls -a
       - name: Save state
         run: echo "{name}={value}" >> $GITHUB_STATE
@@ -44,4 +46,5 @@ jobs:
           prerelease: false
           title: "Release Build"
           files: |
-            nostril-*
+            gnostr
+            gnostr-*
