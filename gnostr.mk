@@ -281,6 +281,9 @@ deps/gnostr-grep/target/release/gnostr-grep:deps/gnostr-grep
 ##	cd deps/gnostr-grep; \
 ##	make cargo-install
 gnostr-grep:deps/gnostr-grep/target/release/gnostr-grep## 	gnostr-grep
+gnostr-grep-test:gnostr-grep
+	./deps/gnostr-grep/target/release/gnostr-grep 0 version
+
 
 
 
