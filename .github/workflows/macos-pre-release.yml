@@ -20,18 +20,16 @@ jobs:
       - uses: styfle/cancel-workflow-action@0.11.0
         with:
           access_token: ${{ github.token }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: "printenv"
         run: |
-          brew install libtool autoconf automake
+          make detect
           printenv
       - name: "Build pre-release"
         run: |
-          make all
-          mv nostril nostril-$RUNNER_OS-$RUNNER_ARCH
-          shasum -a 256 nostril-$RUNNER_OS-$RUNNER_ARCH > nostril-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
-          mv nostril-query nostril-query-$RUNNER_OS-$RUNNER_ARCH
-          shasum -a 256 nostril-query-$RUNNER_OS-$RUNNER_ARCH > nostril-query-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
+          cmake . && make secp256k1 all
+          mv gnostr gnostr-$RUNNER_OS-$RUNNER_ARCH
+          shasum -a 256 gnostr-$RUNNER_OS-$RUNNER_ARCH > gnostr-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
           ls -a
       - name: Save state
         run: echo "{name}={value}" >> $GITHUB_STATE
@@ -44,5 +42,5 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            nostril-*
-
+            gnostr
+            gnostr-*
