@@ -4,7 +4,7 @@ name: ubuntu-pre-release
 on:
   push:
     tags:
-      - 'pre-release**'
+      - "v*.*.*-pre-release**"
 
   workflow_dispatch:
 
