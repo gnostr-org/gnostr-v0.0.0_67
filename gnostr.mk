@@ -245,7 +245,7 @@ deps/gnostr-cat:deps/gnostr-cat/.git
 gnostr-cat:deps/gnostr-cat/target/release/gnostr-cat
 	cd deps/gnostr-cat && \
 		make install
-	@cp $@ gnostr-cat || echo "" 2>/dev/null
+	@cp $< $@ || echo "" 2>/dev/null
 
 
 
