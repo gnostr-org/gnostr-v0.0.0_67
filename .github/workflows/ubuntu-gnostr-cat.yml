@@ -54,6 +54,13 @@ jobs:
         with:
           toolchain: nightly
 
+      - run: ln -s deps/gnostr-cat/Cargo.toml .
+
+      - name: Run cargo check
+        uses: actions-rs/cargo@v1
+        with:
+          command: check
+
       - run: touch ~/GITHUB_TOKEN.txt
 
       - run: sudo make detect
