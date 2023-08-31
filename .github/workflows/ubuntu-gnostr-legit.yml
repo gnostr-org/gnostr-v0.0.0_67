@@ -74,8 +74,8 @@ jobs:
         run: |
           echo $GNOSTR
 
-      - run: sudo make detect && rustup update && rustc --version 
-      - run: curl -sf -L https://static.rust-lang.org/rustup.sh | sh && rustc --version
+      - run: sudo make detect && rustup update && rustc --version
+      - run: RUSTUP_INIT_SKIP_PATH_CHECK=yes curl -sf -L https://static.rust-lang.org/rustup.sh -y  | sh && rustc --version
       - run: sudo cmake .
 
       - run: sudo cargo install gnostr-cat

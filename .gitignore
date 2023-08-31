@@ -23,16 +23,17 @@ gnostr
 gnostr-cat
 gnostr-cli
 gnostr-client
-gnostr-git
+gnostr-command
 gnostr-get-relays
+gnostr-git
 gnostr-gnode
 gnostr-grep
 gnostr-legit
 gnostr-relay
 gnostr-req
 gnostr-set-relays
+gnostr-tests
 gnostr-xor
-tests
 
 libnostr.a
 *.dylib

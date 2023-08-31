@@ -212,12 +212,14 @@ deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256/gnostr-sha256
 .PHONY:
 gnostr-sha256:deps/gnostr-sha256/target/release/gnostr-sha256
 
+.PHONY:deps/gnostr-proxy/.git
 deps/gnostr-proxy/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-proxy
 .PHONY:deps/gnostr-proxy
 deps/gnostr-proxy:deps/gnostr-proxy/.git
 	cd deps/gnostr-proxy && \
 		$(MAKE) install
+.PHONY:gnostr-proxy
 gnostr-proxy:deps/gnostr-proxy
 	install deps/gnostr-proxy/gnostr-proxy /usr/local/bin
 

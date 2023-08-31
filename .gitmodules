@@ -83,9 +83,15 @@
 [submodule "deps/gnostr-sha256"]
 	path = deps/gnostr-sha256
 	url = https://github.com/gnostr-org/gnostr-sha256.git
+	branch = master
+	ignore = dirty
+	shallow = true
 [submodule "deps/gnostr-cli"]
 	path = deps/gnostr-cli
 	url = https://github.com/gnostr-org/gnostr-cli.git
+	branch = master
+	ignore = dirty
+	shallow = true
 [submodule "deps/gnostr-act"]
 	path = deps/gnostr-act
 	url = https://github.com/gnostr-org/gnostr-act.git
