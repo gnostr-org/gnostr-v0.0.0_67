@@ -245,12 +245,8 @@ deps/gnostr-cat:deps/gnostr-cat/.git
 deps/gnostr-cat/target/release/gnostr-cat:deps/gnostr-cat
 	cd deps/gnostr-cat && \
 		make cargo-build-release install
-.PHONY:gnostr-cat
+	@cp $@ .  || echo "" 2>/dev/null
 gnostr-cat:deps/gnostr-cat/target/release/gnostr-cat
-	cd deps/gnostr-cat && \
-		make cargo-build-release install
-	@cp $@ gnostr-cat || echo "" 2>/dev/null
-
 
 
 .PHONY:deps/gnostr-cli/.git
@@ -260,7 +256,7 @@ deps/gnostr-cli/.git:
 deps/gnostr-cli/target/release/gnostr-cli:deps/gnostr-cli
 	cd deps/gnostr-cli && \
 		make cargo-build-release cargo-install
-	@cp $@ gnostr-cli || echo "" 2>/dev/null
+	@cp $@ .  || echo "" 2>/dev/null
 .PHONY:gnostr-cli
 ##gnostr-cli
 ##deps/gnostr-cli deps/gnostr-cli/.git
