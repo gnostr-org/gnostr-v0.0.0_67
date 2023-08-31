@@ -77,7 +77,8 @@ jobs:
       - run: sudo make detect
       - run: sudo cmake .
 
-      - run: sudo make install gnostr-install gnostr-legit
+      - run: sudo cargo install gnostr-cat
+      - run: sudo make install gnostr-git gnostr-cat gnostr-legit
 
       - name: Save deps
         id: cache-deps-save
