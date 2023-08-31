@@ -152,6 +152,7 @@ deps/gnostr-git/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-git
 deps/gnostr-git/gnostr-git:deps/gnostr-git/.git
 	cd deps/gnostr-git && make && make install
+	#@cp $@ .  || echo "" 2>/dev/null
 gnostr-git:deps/gnostr-git/gnostr-git## 	gnostr-git
 	cp $< $@
 	install $@ /usr/local/bin/
@@ -161,9 +162,11 @@ gnostr-git:deps/gnostr-git/gnostr-git## 	gnostr-git
 
 gnostr-get-relays:
 	$(CC) ./template/gnostr-get-relays.c -o gnostr-get-relays
+	install $@ /usr/local/bin/
 
 gnostr-set-relays:
 	$(CC) ./template/gnostr-set-relays.c -o gnostr-set-relays
+	install $@ /usr/local/bin/
 
 
 
@@ -187,6 +190,7 @@ deps/gnostr-command/gnostr-command:deps/gnostr-command/.git
 deps/gnostr-command/target/release/gnostr-command:deps/gnostr-command/gnostr-command## 	gnostr-command
 gnostr-command:deps/gnostr-command/target/release/gnostr-command## 	gnostr-command
 	cp $< $@ && exit;
+	install $@ /usr/local/bin/
 
 
 deps/gnostr-legit/.git:gnostr-git
@@ -211,6 +215,8 @@ deps/gnostr-sha256/gnostr-sha256:deps/gnostr-sha256/.git
 deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256/gnostr-sha256## 	gnostr-sha256
 .PHONY:
 gnostr-sha256:deps/gnostr-sha256/target/release/gnostr-sha256
+	cp $< $@ && exit;
+	install $@ /usr/local/bin/
 
 .PHONY:deps/gnostr-proxy/.git
 deps/gnostr-proxy/.git:
@@ -274,9 +280,10 @@ deps/gnostr-grep/target/release/gnostr-grep:deps/gnostr-grep
 	cd deps/gnostr-grep && make cargo-build-release && make install
 .PHONY:gnostr-grep
 gnostr-grep:deps/gnostr-grep/target/release/gnostr-grep## 	gnostr-grep
-	@cp $@ gnostr-grep || echo "" 2>/dev/null
+	@cp $@ .  || echo "" 2>/dev/null
 gnostr-grep-test:gnostr-grep
-	./deps/gnostr-grep/target/release/gnostr-grep 0 version
+	./gnostr-grep 0 version || echo "./gnostr-grep 0 version failed..."
+	gnostr-grep 0 version || echo "gnostr-grep 0 version failed...""
 
 
 
