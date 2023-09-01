@@ -15,7 +15,7 @@ on:
       - '*/*'
       - '**'
       - 'master'
-      - '**pre-release**'
+      - 'main'
 
   workflow_dispatch:
 
@@ -52,6 +52,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+      - name: apt-get update || brew update
         run: |
           sudo apt-get update || brew update
       - name: apt-get install || echo
