@@ -1,4 +1,4 @@
-name: macos-pre-release
+name: macos-matrix
 
 # Controls when the action will run.
 on:
@@ -21,7 +21,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  pre-release:
+  build:
     strategy:
       matrix:
         os: [macos-latest, macos-11, macos-12]
@@ -66,6 +66,25 @@ jobs:
 
       - run: sudo make libsecp256k1.a
       - run: sudo make gnostr
+
+
+      - run: cmake . && make secp256k1 gnostr-all all
+      - run: mv gnostr gnostr-$RUNNER_OS-$RUNNER_ARCH
+      - run: shasum -a 256 gnostr-$RUNNER_OS-$RUNNER_ARCH > gnostr-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
+      - run: ls -a
+      - name: Save state
+        run: echo "{name}={value}" >> $GITHUB_STATE
+      - name: Set output
+        run: echo "{name}={value}" >> $GITHUB_OUTPUT
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: ${{ matrix.os }}
+          prerelease: true
+          title: "Development Build"
+          files: |
+            gnostr
+            gnostr-*
 
       - name: Save deps
         id: cache-deps-save
