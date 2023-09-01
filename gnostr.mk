@@ -272,18 +272,23 @@ gnostr-cli:deps/gnostr-cli/target/release/gnostr-cli## 	gnostr-cli
 
 
 
+.PHONY:deps/gnostr-grep/.git
 deps/gnostr-grep/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-grep
-deps/gnostr-grep:deps/gnostr-grep/.git
 .PHONY:deps/gnostr-grep/target/release/gnostr-grep
 deps/gnostr-grep/target/release/gnostr-grep:deps/gnostr-grep
-	cd deps/gnostr-grep && make cargo-build-release && make install
-.PHONY:gnostr-grep
-gnostr-grep:deps/gnostr-grep/target/release/gnostr-grep## 	gnostr-grep
+	cd deps/gnostr-grep && \
+		make cargo-build-release cargo-install
 	@cp $@ .  || echo "" 2>/dev/null
+.PHONY:gnostr-grep
+##gnostr-grep
+##deps/gnostr-grep deps/gnostr-grep/.git
+##	cd deps/gnostr-grep; \
+##	make cargo-build-release cargo-install
+gnostr-grep:deps/gnostr-grep/target/release/gnostr-grep## 	gnostr-grep
+
 gnostr-grep-test:gnostr-grep
-	./gnostr-grep 0 version || echo "./gnostr-grep 0 version failed..."
-	gnostr-grep 0 version || echo "gnostr-grep 0 version failed...""
+	@$(shell which gnostr-grep) 0 $(PWD)/version
 
 
 
