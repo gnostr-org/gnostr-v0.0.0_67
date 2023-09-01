@@ -1,4 +1,4 @@
-name: macos-matrix
+name: macos-pre-release
 
 # Controls when the action will run.
 on:
