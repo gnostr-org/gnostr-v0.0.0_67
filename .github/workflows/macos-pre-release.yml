@@ -26,6 +26,10 @@ jobs:
       matrix:
         os: [macos-latest, macos-11, macos-12]
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - uses: styfle/cancel-workflow-action@0.11.0
         if: ${{ !env.ACT }}
@@ -67,7 +71,7 @@ jobs:
       - run: sudo make libsecp256k1.a
       - run: sudo make gnostr
 
-      - run: sudo cmake . && sudo make secp256k1 gnostr-all all
+      - run: sudo cmake . && sudo make secp256k1 gnostr-all
 
       - run: mv gnostr gnostr-$RUNNER_OS-$RUNNER_ARCH
       - run: shasum -a 256 gnostr-$RUNNER_OS-$RUNNER_ARCH > gnostr-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
