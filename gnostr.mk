@@ -23,7 +23,7 @@ ARS                                    := libsecp256k1.a
 LIB_ARS                                := libsecp256k1.a libgit.a
 
 #SUBMODULES                              = deps/secp256k1
-SUBMODULES                              = deps/secp256k1 deps/git deps/gnostr-cat deps/hyper-nostr deps/hyper-sdk deps/gnostr-act deps/openssl deps/gnostr-py deps/gnostr-aio deps/gnostr-legit deps/gnostr-relay deps/gnostr-proxy deps/gnostr-relay ext/boost_1_82_0
+SUBMODULES                              = deps/secp256k1 deps/gnostr-cat deps/hyper-nostr deps/hyper-sdk deps/gnostr-act deps/openssl deps/gnostr-py deps/gnostr-aio deps/gnostr-legit deps/gnostr-proxy #ext/boost_1_82_0
 
 VERSION                                :=$(shell cat version)
 export VERSION
@@ -39,8 +39,8 @@ export GTAR
 
 
 ##all:
-#all: submodules gnostr gnostr-git gnostr-get-relays gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-xor docs
-all: submodules gnostr gnostr-cat gnostr-git gnostr-get-relays gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-xor docs
+#all: submodules gnostr gnostr-cat gnostr-git gnostr-get-relays gnostr-docs
+all: submodules gnostr gnostr-all gnostr-docs## 	make submodules gnostr gnostr-cat gnostr-git gnostr-get-relays gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-xor docs
 ##	build gnostr tool and related dependencies
 
 ##gnostr-docs:
@@ -184,10 +184,10 @@ gnostr-build-install:gnostr-build## 	gnostr-build-install
 
 deps/gnostr-command/.git:gnostr-git
 	@devtools/refresh-submodules.sh deps/gnostr-command
-deps/gnostr-command/gnostr-command:deps/gnostr-command/.git
+deps/gnostr-command:deps/gnostr-command/.git
 	cd deps/gnostr-command && \
 		make install
-deps/gnostr-command/target/release/gnostr-command:deps/gnostr-command/gnostr-command## 	gnostr-command
+deps/gnostr-command/target/release/gnostr-command:deps/gnostr-command## 	gnostr-command
 gnostr-command:deps/gnostr-command/target/release/gnostr-command## 	gnostr-command
 	cp $< $@ && exit;
 	install $@ /usr/local/bin/
@@ -196,10 +196,10 @@ gnostr-command:deps/gnostr-command/target/release/gnostr-command## 	gnostr-comma
 deps/gnostr-legit/.git:gnostr-git
 	@devtools/refresh-submodules.sh deps/gnostr-legit
 #.PHONY:deps/gnostr-legit/gnostr-legit
-deps/gnostr-legit/gnostr-legit:deps/gnostr-legit/.git
+deps/gnostr-legit:deps/gnostr-legit/.git
 	cd deps/gnostr-legit && \
 		make legit-install
-deps/gnostr-legit/target/release/gnostr-legit:deps/gnostr-legit/gnostr-legit## 	gnostr-legit
+deps/gnostr-legit/target/release/gnostr-legit:deps/gnostr-legit## 	gnostr-legit
 gnostr-legit:deps/gnostr-legit/target/release/gnostr-legit## 	gnostr-legit
 	cp $< $@ && exit;
 	install -v template/gnostr-* /usr/local/bin >/tmp/gnostr-legit.log
@@ -208,11 +208,10 @@ gnostr-legit:deps/gnostr-legit/target/release/gnostr-legit## 	gnostr-legit
 
 deps/gnostr-sha256/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-sha256
-#.PHONY:deps/gnostr-sha256/gnostr-sha256
-deps/gnostr-sha256/gnostr-sha256:deps/gnostr-sha256/.git
+deps/gnostr-sha256:deps/gnostr-sha256/.git
 	cd deps/gnostr-sha256 && \
 		make cargo-install
-deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256/gnostr-sha256## 	gnostr-sha256
+deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256## 	gnostr-sha256
 .PHONY:
 gnostr-sha256:deps/gnostr-sha256/target/release/gnostr-sha256
 	cp $< $@ && exit;
@@ -437,7 +436,7 @@ gnostr-query-test:gnostr-cat gnostr-query gnostr-install
 	./template/gnostr-query -t wobble | $(shell which gnostr-cat) -u wss://relay.damus.io
 	./template/gnostr-query -t blockheight | gnostr-cat -u wss://relay.damus.io
 
-gnostr-all:detect gnostr gnostr-git gnostr-legit gnostr-cat gnostr-grep gnostr-cli gnostr-sha256 gnostr-proxy gnostr-query gnostr-act gnostr-command
+gnostr-all:submodules detect gnostr gnostr-git gnostr-legit gnostr-cat gnostr-grep gnostr-cli gnostr-sha256 gnostr-proxy gnostr-query gnostr-act gnostr-command
 	$(MAKE) gnostr-build-install
 
 dist: gnostr-docs version## 	create tar distribution

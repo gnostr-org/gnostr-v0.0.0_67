@@ -1,4 +1,4 @@
-name: ubuntu-pre-release
+name: ubuntu-gnostr-sha256
 
 # Controls when the action will run.
 on:
@@ -21,15 +21,11 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  pre-release:
+  build:
     strategy:
       matrix:
-        os: [ubuntu-latest] #,ubuntu-20.04, ubuntu-22.04]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    permissions:
-      contents: write
-      pull-requests: write
-      repository-projects: write
     steps:
       - uses: styfle/cancel-workflow-action@0.11.0
         if: ${{ !env.ACT }}
@@ -53,41 +49,23 @@ jobs:
           submodules: 'true'
           set-safe-directory: 'true'
 
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rs/toolchain@v1.0.6
+        #if: ${{ !env.ACT }}
         with:
           toolchain: stable
-      - name: apt-get update || brew update
+
+      - name: apt-get install
+        #if: ${{ !env.ACT }}
         run: |
-          sudo apt-get update || brew update
-      - name: apt-get install || echo
-        run: |
-          sudo apt-get install -y autoconf automake bash build-essential gettext libcurl4-openssl-dev libtool make python3 python3-pip util-linux zlib1g-dev cmake g++ cargo || brew install automake make
+          sudo apt-get update
+          sudo apt-get install -y autoconf automake bash build-essential gettext libcurl4-openssl-dev libtool make python3 python3-pip util-linux zlib1g-dev cmake g++ cargo
 
       - run: touch ~/GITHUB_TOKEN.txt
 
       - run: sudo make detect
       - run: sudo cmake .
 
-      - run: sudo make libsecp256k1.a
-      - run: sudo make gnostr
-
-      - run: sudo cmake . && sudo make secp256k1 gnostr-all
-
-      - run: mv gnostr gnostr-$RUNNER_OS-$RUNNER_ARCH
-      - run: shasum -a 256 gnostr-$RUNNER_OS-$RUNNER_ARCH > gnostr-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
-      - run: ls -a
-      - name: Save state
-        run: echo "{name}={value}" >> $GITHUB_STATE
-      - name: Set output
-        run: echo "{name}={value}" >> $GITHUB_OUTPUT
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{ matrix.os }}
-          prerelease: true
-          title: "Development Build"
-          files: |
-            gnostr-*
+      - run: make gnostr-sha256 && which gnostr-sha256
 
       - name: Save deps
         id: cache-deps-save
@@ -100,3 +78,4 @@ jobs:
             /root/.rustup
             CARGO_TARGET_DIR
           key: ${{ steps.cache-deps-restore.outputs.cache-primary-key }}
+

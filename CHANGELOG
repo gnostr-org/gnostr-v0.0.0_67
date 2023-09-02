@@ -1,1 +1,6 @@
 0.0.0
+096376f6b .gitignore:
+a2942793b gnostr.mk:docker-start:doc/gnostr.1
+12560f741 GIT-VERSION-FILE
+8836e4bc6 gnostr.mk:make: detect: $(shell which python3) -m
+fee3666e6 .github/workflows/macos-pre-release.yml: permissions: write-all
