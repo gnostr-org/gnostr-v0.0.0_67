@@ -191,36 +191,40 @@ detect:
 ##	install rustup sequence
 	$(shell echo which rustup) || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y --no-modify-path --default-toolchain stable --profile default & source "$(HOME)/.cargo/env"
 ##	install if Darwin sequence
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && echo 'is Darwin' && $(shell echo which brew) && $(shell echo which cmake) && $(shell echo which rustup) && $(shell echo which cargo) && $(shell echo which gettext) && $(shell echo which autoconf) && $(shell echo which node) && $(shell echo which go) || echo"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install autoconf || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && echo 'is Darwin' && $(shell echo which brew) && $(shell echo which cmake) && $(shell echo which rustup) && $(shell echo which cargo) && $(shell echo which gettext) && $(shell echo which autoconf) && $(shell echo which automake) && $(shell echo which node) && $(shell echo which go) || echo"
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install autoconf     || \
 		echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install automake || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install automake     || \
 		echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install coreutils || \
-		which coreutils || echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install cmake || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install cmake --cask || \
 		which cmake || echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install gettext || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install coreutils    || \
+		which coreutils || echo 'not Darwin';"
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install gcc          || \
+		echo 'not Darwin';"
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install gettext      || \
 		which gettext || echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install golang || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install golang       || \
 		which golang || echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install libtool || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install libtool      || \
 		echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install mercurial || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install mercurial    || \
 		echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install node@14 || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install node@14      || \
 		echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install pkg-config || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install pkg-config   || \
 		echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install python3 || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install python3      || \
 		echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install rustup || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install rustup       || \
 		which rustup || echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install virtualenv || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install secp256k1    || \
+		echo 'not Darwin';"
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install virtualenv   || \
 		which virtualenv || echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew link --overwrite virtualenv || \
 		which virtualenv || echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install zlib || \
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install zlib         || \
 		which zlib || echo 'not Darwin';"
 ##	install if Linux sequence
 	bash -c "[ '$(shell uname -s)' == 'Linux' ] && echo 'is Linux' && \
