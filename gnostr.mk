@@ -252,20 +252,20 @@ deps/gnostr-cat/target/release/gnostr-cat:deps/gnostr-cat
 gnostr-cat:deps/gnostr-cat/target/release/gnostr-cat
 
 
-.PHONY:deps/gnostr-cli/.git
+
 deps/gnostr-cli/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-cli
-.PHONY:deps/gnostr-cli/target/release/gnostr-cli
+deps/gnostr-cli:deps/gnostr-cli/.git
 deps/gnostr-cli/target/release/gnostr-cli:deps/gnostr-cli
 	cd deps/gnostr-cli && \
 		make cargo-build-release cargo-install
-	@cp $@ .  || echo "" 2>/dev/null
-.PHONY:gnostr-cli
 ##gnostr-cli
 ##deps/gnostr-cli deps/gnostr-cli/.git
 ##	cd deps/gnostr-cli; \
 ##	make cargo-build-release cargo-install
+.PHONY:gnostr-cli
 gnostr-cli:deps/gnostr-cli/target/release/gnostr-cli## 	gnostr-cli
+	cp $< $@ && install $@ /usr/local/bin/
 
 
 
