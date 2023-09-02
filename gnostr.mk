@@ -208,8 +208,8 @@ deps/gnostr-sha256/.git:
 deps/gnostr-sha256:deps/gnostr-sha256/.git
 deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256## 	gnostr-sha256
 	cd deps/gnostr-sha256 && \
-		make cargo-build-release
-.PHONY:gnostr-sha256
+		make cargo-install
+deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256## 	gnostr-sha256
 gnostr-sha256:deps/gnostr-sha256/target/release/gnostr-sha256
 	cp $< $@ && install $@ /usr/local/bin/
 
