@@ -87,7 +87,6 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            gnostr
             gnostr-*
 
       - name: Save deps
