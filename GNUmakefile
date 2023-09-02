@@ -240,8 +240,8 @@ detect:
 		virtualenv \
 		zlib* --fix-missing && $(shell echo which cargo) || echo 'add apt-get install sequence';"
 ##	install gvm sequence
-	@rm -rf $(HOME)/.gvm
-	@bash -c "bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer) || echo"
+	@rm -rf $(HOME)/.gvm || echo "not removing ~/.gvm"
+	@bash -c "bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer) || echo 'not installing gvm...'"
 	bash -c "[ '$(shell uname -m)' == 'x86_64' ] && echo 'is x86_64' || echo 'not x86_64';"
 	bash -c "[ '$(shell uname -m)' == 'arm64' ] && [ '$(shell uname -s)' == 'Darwin' ] && type -P brew && brew install pandoc || echo 'not arm64 AND Darwin';"
 	bash -c "[ '$(shell uname -m)' == 'i386' ] && echo 'is i386' || echo 'not i386';"
