@@ -198,6 +198,8 @@ detect:
 		echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install automake     || \
 		echo 'not Darwin';"
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install boost        || \
+		echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install cmake --cask || \
 		which cmake || echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install coreutils    || \
