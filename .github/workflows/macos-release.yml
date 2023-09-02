@@ -14,25 +14,58 @@ jobs:
   release:
     strategy:
       matrix:
-        os: [macos-11, macos-12, macos-latest]
+        os: [macos-latest, macos-11, macos-12]
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - uses: styfle/cancel-workflow-action@0.11.0
+        if: ${{ !env.ACT }}
         with:
           access_token: ${{ github.token }}
+      - name: Restore deps
+        id: cache-deps-restore
+        uses: actions/cache/restore@v3
+        if: ${{ !env.ACT }}
+        with:
+          path: |
+            libsecp256k1.a
+            /root/.cargo
+            /root/.rustup
+            CARGO_TARGET_DIR
+          key: ${{ runner.os }}-deps
+
       - uses: actions/checkout@v3
-      - name: "printenv"
+        with:
+          fetch-depth: '10'
+          submodules: 'true'
+          set-safe-directory: 'true'
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: apt-get update || brew update
         run: |
-          brew install libtool autoconf automake
-          printenv
-      - name: "Build release"
+          sudo apt-get update || brew update
+      - name: apt-get install || echo
         run: |
-          make all
-          mv nostril nostril-$RUNNER_OS-$RUNNER_ARCH
-          shasum -a 256 nostril-$RUNNER_OS-$RUNNER_ARCH > nostril-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
-          mv nostril-query nostril-query-$RUNNER_OS-$RUNNER_ARCH
-          shasum -a 256 nostril-query-$RUNNER_OS-$RUNNER_ARCH > nostril-query-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
-          ls -a
+          sudo apt-get install -y autoconf automake bash build-essential gettext libcurl4-openssl-dev libtool make python3 python3-pip util-linux zlib1g-dev cmake g++ cargo || brew install automake make
+
+      - run: touch ~/GITHUB_TOKEN.txt
+
+      - run: sudo make detect
+      - run: sudo cmake .
+
+      - run: sudo make libsecp256k1.a
+      - run: sudo make gnostr
+
+      - run: sudo cmake . && sudo make secp256k1 gnostr-all
+
+      - run: mv gnostr gnostr-$RUNNER_OS-$RUNNER_ARCH
+      - run: shasum -a 256 gnostr-$RUNNER_OS-$RUNNER_ARCH > gnostr-$RUNNER_OS-$RUNNER_ARCH.sha256.txt
+      - run: ls -a
       - name: Save state
         run: echo "{name}={value}" >> $GITHUB_STATE
       - name: Set output
@@ -44,4 +77,16 @@ jobs:
           prerelease: false
           title: "Release Build"
           files: |
-            nostril-*
+            gnostr-*
+
+      - name: Save deps
+        id: cache-deps-save
+        uses: actions/cache/save@v3
+        if: ${{ !env.ACT }}
+        with:
+          path: |
+            libsecp256k1.a
+            /root/.cargo
+            /root/.rustup
+            CARGO_TARGET_DIR
+          key: ${{ steps.cache-deps-restore.outputs.cache-primary-key }}
