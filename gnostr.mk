@@ -102,21 +102,18 @@ diff-log:
 submodules:deps/secp256k1/.git deps/gnostr-git/.git deps/gnostr-cat/.git deps/hyper-sdk/.git deps/hyper-nostr/.git deps/gnostr-aio/.git deps/gnostr-py/.git deps/gnostr-act/.git deps/gnostr-legit/.git deps/gnostr-proxy/.git deps/gnostr-sha256/.git ## ext/boost_1_82_0/.git ## 	refresh-submodules
 	git submodule update --init --recursive
 
-#.PHONY:deps/secp256k1/config.log
 .ONESHELL:
 deps/secp256k1/.git:
 	devtools/refresh-submodules.sh deps/secp256k1
 deps/secp256k1/include/secp256k1.h: deps/secp256k1/.git
-#.PHONY:deps/secp256k1/configure
 deps/secp256k1/configure: deps/secp256k1/include/secp256k1.h
 	cd deps/secp256k1 && \
 		./autogen.sh && \
 		./configure --enable-module-ecdh --enable-module-schnorrsig --enable-module-extrakeys
-#.PHONY:deps/secp256k1/.libs/libsecp256k1.a
+.PHONY:deps/secp256k1/.libs/libsecp256k1.a
 deps/secp256k1/.libs/libsecp256k1.a:deps/secp256k1/configure
 	cd deps/secp256k1 && \
 		make -j && make install
-.PHONY:libsecp256k1.a
 libsecp256k1.a: deps/secp256k1/.libs/libsecp256k1.a## libsecp256k1.a
 	cp $< $@
 ##libsecp256k1.a
