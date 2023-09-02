@@ -215,7 +215,7 @@ gnostr-sha256:deps/gnostr-sha256/target/release/gnostr-sha256
 
 
 
-.PHONY:deps/gnostr-proxy/.git
+#.PHONY:deps/gnostr-proxy/.git
 deps/gnostr-proxy/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-proxy
 .PHONY:deps/gnostr-proxy
