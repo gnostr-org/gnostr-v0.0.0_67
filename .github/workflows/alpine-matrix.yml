@@ -49,10 +49,9 @@ jobs:
           submodules: 'true'
           set-safe-directory: 'true'
 
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rs/toolchain@latest
         with:
           toolchain: stable
-      - name: rustup
       - run: apk add autoconf automake bash build-base cmake docker file git libc-dev libcurl libtool make openrc openssl-dev python3 py3-pip sed util-linux zlib-dev
       - run: ln -sf /usr/bin/python3 /usr/local/bin/python
       - run: touch ~/GITHUB_TOKEN.txt
