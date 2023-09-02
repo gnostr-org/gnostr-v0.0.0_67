@@ -206,13 +206,14 @@ gnostr-legit:deps/gnostr-legit/target/release/gnostr-legit## 	gnostr-legit
 deps/gnostr-sha256/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-sha256
 deps/gnostr-sha256:deps/gnostr-sha256/.git
+deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256## 	gnostr-sha256
 	cd deps/gnostr-sha256 && \
 		make cargo-build-release
-deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256## 	gnostr-sha256
-.PHONY:
+.PHONY:gnostr-sha256
 gnostr-sha256:deps/gnostr-sha256/target/release/gnostr-sha256
-	cp $< $@ && exit;
-	install $@ /usr/local/bin/
+	cp $< $@ && install $@ /usr/local/bin/
+
+
 
 .PHONY:deps/gnostr-proxy/.git
 deps/gnostr-proxy/.git:
