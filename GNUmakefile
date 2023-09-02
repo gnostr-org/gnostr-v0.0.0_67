@@ -192,6 +192,8 @@ detect:
 	$(shell echo which rustup) || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y --no-modify-path --default-toolchain stable --profile default & source "$(HOME)/.cargo/env"
 ##	install if Darwin sequence
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && echo 'is Darwin' && $(shell echo which brew) && $(shell echo which cmake) && $(shell echo which rustup) && $(shell echo which cargo) && $(shell echo which gettext) && $(shell echo which autoconf) && $(shell echo which automake) && $(shell echo which node) && $(shell echo which go) || echo"
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew update               || \
+		echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install autoconf     || \
 		echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install automake     || \
