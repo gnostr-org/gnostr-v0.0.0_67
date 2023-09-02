@@ -99,14 +99,11 @@ diff-log:
 	@gnostr-git-reflog -h > tests/gnostr-git-reflog-h.log
 	@gnostr-relay -h > tests/gnostr-relay-h.log
 .PHONY:submodules
-submodules:deps/secp256k1/.git deps/gnostr-git/.git deps/gnostr-cat/.git deps/hyper-sdk/.git deps/hyper-nostr/.git deps/gnostr-aio/.git deps/gnostr-py/.git deps/gnostr-act/.git deps/gnostr-legit/.git deps/gnostr-proxy/.git deps/gnostr-sha256/.git ## ext/boost_1_82_0/.git ## 	refresh-submodules
+submodules:deps/gnostr-git/.git deps/gnostr-cat/.git deps/hyper-sdk/.git deps/hyper-nostr/.git deps/gnostr-aio/.git deps/gnostr-py/.git deps/gnostr-act/.git deps/gnostr-legit/.git deps/gnostr-proxy/.git deps/gnostr-sha256/.git ## ext/boost_1_82_0/.git ## 	refresh-submodules
 	git submodule update --init --recursive
 
 .ONESHELL:
-deps/secp256k1/.git:
-	devtools/refresh-submodules.sh deps/secp256k1
-deps/secp256k1/include/secp256k1.h: deps/secp256k1/.git
-deps/secp256k1/configure: deps/secp256k1/include/secp256k1.h
+deps/secp256k1/configure:
 	cd deps/secp256k1 && \
 		./autogen.sh && \
 		./configure --enable-module-ecdh --enable-module-schnorrsig --enable-module-extrakeys
