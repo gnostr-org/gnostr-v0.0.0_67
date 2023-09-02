@@ -70,7 +70,7 @@ jobs:
       - run: sudo make detect
       - run: sudo cmake .
 
-      - run: sudo make libsecp256k1.a
+      - run: sudo make detect libsecp256k1.a
       - run: sudo make gnostr
       - run: sudo make gnostr-all gnostr-install
 
