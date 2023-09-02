@@ -40,7 +40,7 @@ export GTAR
 
 ##all:
 #all: submodules gnostr gnostr-cat gnostr-git gnostr-get-relays gnostr-docs
-all: submodules gnostr gnostr-all gnostr-docs## 	make submodules gnostr gnostr-cat gnostr-git gnostr-get-relays gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-xor docs
+all: detect submodules gnostr gnostr-all gnostr-docs## 	make submodules gnostr gnostr-cat gnostr-git gnostr-get-relays gnostr-docs## 	make gnostr gnostr-cat gnostr-git gnostr-relay gnostr-xor docs
 ##	build gnostr tool and related dependencies
 
 ##gnostr-docs:
