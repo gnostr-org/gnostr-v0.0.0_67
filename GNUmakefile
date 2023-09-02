@@ -204,6 +204,8 @@ detect:
 		echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install gettext      || \
 		which gettext || echo 'not Darwin';"
+	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install git-gui      || \
+		which git-gui || echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install golang       || \
 		which golang || echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install libtool      || \
