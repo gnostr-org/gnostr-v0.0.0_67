@@ -210,7 +210,7 @@ deps/gnostr-sha256/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-sha256
 deps/gnostr-sha256:deps/gnostr-sha256/.git
 	cd deps/gnostr-sha256 && \
-		make cargo-install
+		make cargo-build-release
 deps/gnostr-sha256/target/release/gnostr-sha256:deps/gnostr-sha256## 	gnostr-sha256
 .PHONY:
 gnostr-sha256:deps/gnostr-sha256/target/release/gnostr-sha256

@@ -43,11 +43,11 @@ jobs:
       - name: make install
         run: |
           sudo -S make install
-      - name: man nostril
+      - name: man gnostr
         run: |
-          type -P nostril && man nostril || echo "man nostril not working..."
-      - name: nostril
+          type -P gnostr && man gnostr || echo "man gnostr not working..."
+      - name: gnostr
         run: |
-          #pipe handles non-zero return from nostril default help
+          #pipe handles non-zero return from gnostr default help
           sudo make install > /dev/null 2>&1
-          type -P nostril && nostril --envelope -t nostril --content ""
+          type -P gnostr && gnostr --envelope -t gnostr --content ""
