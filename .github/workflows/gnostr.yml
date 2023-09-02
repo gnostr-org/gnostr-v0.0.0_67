@@ -46,7 +46,6 @@ jobs:
         if: ${{ !env.ACT }}
         with:
           path: |
-            libsecp256k1.a
             /root/.cargo
             /root/.rustup
             CARGO_TARGET_DIR
@@ -67,12 +66,7 @@ jobs:
         run: |
           echo $GNOSTR
 
-      - run: sudo make detect
-      - run: sudo cmake .
-
-      - run: sudo make detect libsecp256k1.a
-      - run: sudo make gnostr
-      - run: sudo make gnostr-all gnostr-install
+      - run: sudo apt-get update && sudo apt-get install libcurl4-openssl-dev && sudo cmake . && make all
 
       - name: Save deps
         id: cache-deps-save
@@ -80,7 +74,6 @@ jobs:
         if: ${{ !env.ACT }}
         with:
           path: |
-            libsecp256k1.a
             /root/.cargo
             /root/.rustup
             CARGO_TARGET_DIR
