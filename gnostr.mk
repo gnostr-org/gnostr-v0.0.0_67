@@ -145,7 +145,7 @@ deps/gnostr-web/.git:
 deps/gnostr-git/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-git
 deps/gnostr-git/gnostr-git:deps/gnostr-git/.git
-	cd deps/gnostr-git && make && make install
+	cd deps/gnostr-git && make configure && ./configure && make && make install
 	#@cp $@ .  || echo "" 2>/dev/null
 gnostr-git:deps/gnostr-git/gnostr-git## 	gnostr-git
 	cp $< $@
