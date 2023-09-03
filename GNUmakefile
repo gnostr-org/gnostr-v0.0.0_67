@@ -199,8 +199,8 @@ detect:
 		echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install automake     || \
 		echo 'not Darwin';"
-	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install boost        || \
-		echo 'not Darwin';"
+##	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install boost        || \
+##		echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install cmake --cask || \
 		which cmake || echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install coreutils    || \
@@ -280,7 +280,7 @@ detect:
 		which zlib || echo 'not Linux';"
 	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install virtualenv            || \
 		which zlib || echo 'not Linux';"
-	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install zlib                  || 
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install zlib                  || \
 		which zlib || echo 'not Linux';"
 
 ##	install gvm sequence
