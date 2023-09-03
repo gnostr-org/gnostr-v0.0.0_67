@@ -189,11 +189,10 @@ gnostr-command:deps/gnostr-command/target/release/gnostr-command## 	gnostr-comma
 
 deps/gnostr-legit/.git:gnostr-git
 	@devtools/refresh-submodules.sh deps/gnostr-legit
-#.PHONY:deps/gnostr-legit/gnostr-legit
 deps/gnostr-legit:deps/gnostr-legit/.git
+deps/gnostr-legit/target/release/gnostr-legit:deps/gnostr-legit## 	gnostr-legit
 	cd deps/gnostr-legit && \
 		make legit-install
-deps/gnostr-legit/target/release/gnostr-legit:deps/gnostr-legit## 	gnostr-legit
 gnostr-legit:deps/gnostr-legit/target/release/gnostr-legit## 	gnostr-legit
 	cp $< $@ && exit;
 	install -v template/gnostr-* /usr/local/bin >/tmp/gnostr-legit.log
