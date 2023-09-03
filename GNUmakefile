@@ -192,6 +192,7 @@ detect:
 	$(shell echo which rustup) || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y --no-modify-path --default-toolchain stable --profile default & source "$(HOME)/.cargo/env"
 ##	install if Darwin sequence
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && echo 'is Darwin' && $(shell echo which brew) && $(shell echo which cmake) && $(shell echo which rustup) && $(shell echo which cargo) && $(shell echo which gettext) && $(shell echo which autoconf) && $(shell echo which automake) && $(shell echo which node) && $(shell echo which go) || echo"
+#### 	Darwin
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew update               || \
 		echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install autoconf     || \
@@ -232,23 +233,56 @@ detect:
 		which virtualenv || echo 'not Darwin';"
 	bash -c "[ '$(shell uname -s)' == 'Darwin' ] && brew install zlib         || \
 		which zlib || echo 'not Darwin';"
-##	install if Linux sequence
-	bash -c "[ '$(shell uname -s)' == 'Linux' ] && echo 'is Linux' && \
-		$(shell echo which apt-get) && \
-		apt-get update && \
-		apt-get install -y \
-		autoconf \
-		bison build-essential \
-		cargo clang cmake-curses-gui cmake \
-		expat \
-		gettext golang-go \
-		libcurl4-openssl-dev libexpat1-dev libssl-dev libtool \
-		mercurial \
-		npm \
-		pandoc pkg-config python3 python3-pip python-is-python3 \
-		util-linux \
-		virtualenv \
-		zlib* --fix-missing && $(shell echo which cargo) || echo 'add apt-get install sequence';"
+
+#### 	Linux
+
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install autoconf              || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install bison                 || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install build-essential       || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install cargo                 || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install clang                 || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install cmake-curses-gui      || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install cmake                 || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install expat                 || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install gettext               || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install golang-go             || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install libcurl4-openssl-dev  || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install libssl-dev            || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install libtool               || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install mercurial             || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install npm                   || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install pandoc                || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install pkg-config            || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install python3               || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install python3-pip           || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install python-is-python3     || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install util-linux            || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install virtualenv            || \
+		which zlib || echo 'not Linux';"
+	bash -c "[ '$(shell uname -s)' == 'Linux' ] && apt-get install zlib                  || 
+		which zlib || echo 'not Linux';"
+
 ##	install gvm sequence
 	@rm -rf $(HOME)/.gvm || echo "not removing ~/.gvm"
 	@bash -c "bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer) || echo 'not installing gvm...'"
