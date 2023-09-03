@@ -253,6 +253,7 @@ gnostr-cat:deps/gnostr-cat/target/release/gnostr-cat
 deps/gnostr-cli/.git:
 	@devtools/refresh-submodules.sh deps/gnostr-cli
 deps/gnostr-cli:deps/gnostr-cli/.git
+.PHONY:deps/gnostr-cli/target/release/gnostr-cli
 deps/gnostr-cli/target/release/gnostr-cli:deps/gnostr-cli
 	cd deps/gnostr-cli && \
 		make cargo-build-release cargo-install
